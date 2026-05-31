@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design System — ProtoComp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 16px;
+      background: var(--surface-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-md);
+    }
+    .swatch-chip {
+      height: 88px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+    }
+    .swatch-name {
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .swatch-token {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.3px;
+    }
+    .swatch-hex {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--cyan);
+      letter-spacing: 0.3px;
+    }
+    .ds-grid-6 {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+    .ds-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 900px) { .ds-grid-6 { grid-template-columns: repeat(3, 1fr); } .ds-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .ds-grid-6 { grid-template-columns: repeat(2, 1fr); } .ds-grid-4 { grid-template-columns: 1fr; } }
+
+    .type-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 24px;
+      align-items: baseline;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .type-spec {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .demo-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .demo-block {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-md);
+    }
+  </style>
+</head>
+<body data-screen-label="Design System">
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">proto<b>comp</b></a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="tech.html">Tech</a>
+        <a href="faq.html">FAQ</a>
+        <a href="tools.html">Free Tools</a>
+        <a href="index.html#waitlist" class="nav-cta">Waitlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">Design system reference</p>
+      <h1>Tokens, type, components.</h1>
+      <p class="lead" style="margin-top: 16px;">Hand this off. Everything the marketing site uses lives here.</p>
+    </div>
+  </header>
+
+  <!-- COLORS -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Colors</p>
+        <h2>OLED-first. Flat. No gradients.</h2>
+      </div>
+
+      <p class="eyebrow-muted" style="margin-bottom: 12px;">Surfaces</p>
+      <div class="ds-grid-6">
+        <div class="swatch"><div class="swatch-chip" style="background: #000;"></div><div class="swatch-name">Background</div><div class="swatch-token">--bg</div><div class="swatch-hex">#000000</div></div>
+        <div class="swatch"><div class="swatch-chip" style="background: #0A0A0A;"></div><div class="swatch-name">Surface</div><div class="swatch-token">--surface</div><div class="swatch-hex">#0A0A0A</div></div>
+        <div class="swatch"><div class="swatch-chip" style="background: #111111;"></div><div class="swatch-name">Surface raised</div><div class="swatch-token">--surface-raised</div><div class="swatch-hex">#111111</div></div>
+        <div class="swatch"><div class="swatch-chip" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.06);"></div><div class="swatch-name">Border subtle</div><div class="swatch-token">--border-subtle</div><div class="swatch-hex">rgba 255 / 0.06</div></div>
+        <div class="swatch"><div class="swatch-chip" style="background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.10);"></div><div class="swatch-name">Border medium</div><div class="swatch-token">--border-medium</div><div class="swatch-hex">rgba 255 / 0.10</div></div>
+      </div>
+
+      <p class="eyebrow-muted" style="margin: 32px 0 12px;">Text</p>
+      <div class="ds-grid-4">
+        <div class="swatch"><div class="swatch-chip" style="background: #F0F0F0;"></div><div class="swatch-name">Text primary</div><div class="swatch-token">--text</div><div class="swatch-hex">#F0F0F0</div></div>
+        <div class="swatch"><div class="swatch-chip" style="background: rgba(255,255,255,0.55);"></div><div class="swatch-name">Text secondary</div><div class="swatch-token">--text-secondary</div><div class="swatch-hex">rgba 255 / 0.55</div></div>
+        <div class="swatch"><div class="swatch-chip" style="background: rgba(255,255,255,0.30);"></div><div class="swatch-name">Text tertiary</div><div class="swatch-token">--text-tertiary</div><div class="swatch-hex">rgba 255 / 0.30</div></div>
+      </div>
+
+      <p class="eyebrow-muted" style="margin: 32px 0 12px;">Accents</p>
+      <div class="ds-grid-4">
+        <div class="swatch"><div class="swatch-chip" style="background: #00E5FF; box-shadow: 0 0 24px rgba(0,229,255,0.30);"></div><div class="swatch-name">Cyan (primary)</div><div class="swatch-token">--cyan · CTAs, data, links</div><div class="swatch-hex">#00E5FF</div></div>
+        <div class="swatch"><div class="swatch-chip" style="background: #FFAB00;"></div><div class="swatch-name">Amber</div><div class="swatch-token">--amber · warnings, peptide cautions</div><div class="swatch-hex">#FFAB00</div></div>
+        <div class="swatch"><div class="swatch-chip" style="background: #00E676;"></div><div class="swatch-name">Green</div><div class="swatch-token">--green · success, positive trends</div><div class="swatch-hex">#00E676</div></div>
+        <div class="swatch"><div class="swatch-chip" style="background: #FF3D3D;"></div><div class="swatch-name">Red</div><div class="swatch-token">--red · critical, danger</div><div class="swatch-hex">#FF3D3D</div></div>
+      </div>
+
+      <p style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary); margin-top: 28px; letter-spacing: 0.4px;">
+        Cyan glow:&nbsp; <span style="color: var(--cyan);">box-shadow: 0 0 20px rgba(0, 229, 255, 0.30);</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Typography</p>
+        <h2>DM Sans for everything. JetBrains Mono for numbers.</h2>
+      </div>
+
+      <div class="type-row">
+        <div class="type-spec">H1 · 56px / 700</div>
+        <h1 style="font-size: 56px;">Peptides aren't vitamins.</h1>
+      </div>
+      <div class="type-row">
+        <div class="type-spec">H2 · 40px / 700</div>
+        <h2>Three deterministic engines.</h2>
+      </div>
+      <div class="type-row">
+        <div class="type-spec">H3 · 26px / 700</div>
+        <h3>Your stack modifies your sets.</h3>
+      </div>
+      <div class="type-row">
+        <div class="type-spec">Lead · 20px / 400</div>
+        <p class="lead" style="margin: 0;">ProtoComp adapts workouts, macros, and coaching to your active stack.</p>
+      </div>
+      <div class="type-row">
+        <div class="type-spec">Body · 16px / 400</div>
+        <p style="margin: 0; color: var(--text);">Mifflin-St Jeor baseline. Per-compound TDEE modifiers from published research.</p>
+      </div>
+      <div class="type-row">
+        <div class="type-spec">Eyebrow · mono 11px / 500<br/>letter-spacing 1.2px / caps</div>
+        <p class="eyebrow">Peptide-aware training system</p>
+      </div>
+      <div class="type-row">
+        <div class="type-spec">Mono data · 48px / 500</div>
+        <span class="mono" style="font-size: 48px; color: var(--cyan); letter-spacing: -0.02em;">400+</span>
+      </div>
+      <div class="type-row" style="border-bottom: none;">
+        <div class="type-spec">Mono caption · 11px / 500<br/>tertiary</div>
+        <span class="mono" style="font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.5px;">128 EXERCISES · PHARMA-TAGGED</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Buttons</p>
+        <h2>Three variants.</h2>
+      </div>
+      <div class="demo-block">
+        <div class="demo-row">
+          <button class="btn btn-primary">Join the waitlist</button>
+          <button class="btn btn-secondary">Try the calculator</button>
+          <button class="btn btn-ghost">Skip for now →</button>
+        </div>
+        <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); margin-top: 18px; letter-spacing: 0.4px;">
+          Primary uses cyan glow on hover. Secondary uses 10% white border. Ghost is text-only, cyan on hover.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Form inputs</p>
+        <h2>Cyan focus ring. No floating labels.</h2>
+      </div>
+      <div class="demo-block" style="max-width: 480px;">
+        <form class="waitlist-form" onsubmit="event.preventDefault();" style="max-width: none;">
+          <input type="email" class="input" placeholder="you@domain.com" />
+          <button class="btn btn-primary">Join</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Cards</p>
+        <h2>14px radius. 6% white border. No drop shadow.</h2>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <p class="eyebrow">Default</p>
+          <h3>Standard surface card.</h3>
+          <p>Background #111. Border 6% white. Padding 24px. Border-radius 14px. Hover lifts border opacity, no shadow.</p>
+          <div class="card-footer">Default · most content</div>
+        </article>
+        <article class="card card-amber">
+          <p class="eyebrow">Amber callout</p>
+          <h3>Use for warnings and "Why this matters" notes.</h3>
+          <p>Amber border + soft amber tint. Body text remains primary white for readability against the tint.</p>
+          <div class="card-footer">Warning · caution · context</div>
+        </article>
+        <article class="card card-soon">
+          <p class="eyebrow">Coming soon</p>
+          <h3>Placeholder for upcoming features.</h3>
+          <p>Lower opacity body. "Coming soon" tag pinned in the top-right of the card.</p>
+          <div class="card-footer">Ships after launch</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAT / PILLS -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Data display</p>
+        <h2>Numbers in mono cyan. Always.</h2>
+      </div>
+      <div class="demo-block">
+        <div class="grid-3" style="margin-bottom: 32px;">
+          <div class="stat">
+            <div class="stat-number">400+</div>
+            <div class="stat-label"><strong class="text-primary">Compounds</strong> in the corpus</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">128</div>
+            <div class="stat-label"><strong class="text-primary">Exercises</strong> pharma-tagged</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">+12%</div>
+            <div class="stat-label"><strong class="text-primary">T3 TDEE</strong> modifier</div>
+          </div>
+        </div>
+        <div class="row">
+          <span class="pill"><span class="dot" style="color: var(--text-tertiary);"></span>Neutral pill</span>
+          <span class="pill pill-cyan"><span class="dot"></span>Active</span>
+          <span class="pill pill-amber"><span class="dot"></span>Caution</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPACING & RADII -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Spacing &amp; radii</p>
+        <h2>Section: 96px desktop, 64px mobile.</h2>
+      </div>
+      <div class="grid-3">
+        <div class="demo-block"><span class="mono" style="color: var(--cyan); font-size: 18px;">8px</span><p style="margin-top: 8px; font-size: 13px;">Small radius — pills, small chips</p></div>
+        <div class="demo-block"><span class="mono" style="color: var(--cyan); font-size: 18px;">12px</span><p style="margin-top: 8px; font-size: 13px;">Medium — inputs, buttons, small cards</p></div>
+        <div class="demo-block"><span class="mono" style="color: var(--cyan); font-size: 18px;">14px</span><p style="margin-top: 8px; font-size: 13px;">Large — primary cards, output panels</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNERS -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Banner</p>
+        <h2>Amber-bordered, soft-tinted.</h2>
+      </div>
+      <div class="banner-amber">
+        <div class="banner-amber-body">
+          <strong style="color: var(--amber); font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; display: block; margin-bottom: 6px;">More than math</strong>
+          ProtoComp adapts your workouts based on your peptide stack.
+        </div>
+        <a href="#">Join the waitlist →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- KILL LIST -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Don't do this</p>
+        <h2>The kill list.</h2>
+      </div>
+      <div class="does-grid">
+        <div class="does-col">
+          <p class="does-head no">✗ Never ship</p>
+          <ul class="does-list">
+            <li>Streaks, badges, XP, flame emojis</li>
+            <li>Stock photos of muscular men in gyms</li>
+            <li>"Get shredded in 30 days" copy</li>
+            <li>Hero videos of generic fitness footage</li>
+            <li>Fake testimonials</li>
+            <li>"AI-powered" marketing language</li>
+            <li>Gradient backgrounds</li>
+            <li>"Trusted by 10,000+ athletes" — we don't have that</li>
+          </ul>
+        </div>
+        <div class="does-col">
+          <p class="does-head yes">✓ Always ship</p>
+          <ul class="does-list">
+            <li>Flat colors only</li>
+            <li>Type-first hierarchy</li>
+            <li>Cyan glow for emphasis instead of drop shadow</li>
+            <li>Numbers in JetBrains Mono</li>
+            <li>Eyebrows in 11px mono caps cyan</li>
+            <li>Specific numbers ("+12% TDEE on T3")</li>
+            <li>Direct sentences</li>
+            <li>First-person plural voice</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="nav-brand" style="display: inline-block; margin-bottom: 12px;">proto<b>comp</b></a>
+          <p class="footer-tag">Protocol-aware training system.</p>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.5px;">© 2026 ProtoComp</p>
+        </div>
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="tech.html">Tech</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="tools.html">Free Tools</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Reference</h5>
+          <ul>
+            <li><a href="design-system.html">Design system</a></li>
+            <li><a href="handoff.html">Next.js structure</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">Deterministic math · Citation-grounded AI · No guesswork</div>
+    </div>
+  </footer>
+</body>
+</html>

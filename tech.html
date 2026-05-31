@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tech — ProtoComp</title>
+  <meta name="description" content="Deterministic engines and stack-aware, citation-grounded AI. One corpus." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-screen-label="Tech">
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">proto<b>comp</b></a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="tech.html" class="active">Tech</a>
+        <a href="faq.html">FAQ</a>
+        <a href="tools.html">Free Tools</a>
+        <a href="index.html#waitlist" class="nav-cta">Waitlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">How it works</p>
+      <h1>Deterministic engines. Stack-aware AI. One corpus.</h1>
+    </div>
+  </header>
+
+  <!-- Architecture diagram -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Architecture</p>
+        <h2>What feeds what.</h2>
+      </div>
+
+      <div class="arch">
+        <p class="eyebrow-muted" style="margin-bottom: 4px;">Inputs</p>
+        <div class="arch-row r4">
+          <div class="arch-cell">
+            <div class="arch-cell-label">01</div>
+            <div class="arch-cell-title">Your cabinet</div>
+            <div class="arch-cell-body">Active compounds, doses, frequencies, cycle position.</div>
+          </div>
+          <div class="arch-cell">
+            <div class="arch-cell-label">02</div>
+            <div class="arch-cell-title">Your check-in</div>
+            <div class="arch-cell-body">Sleep, soreness, mood, RPE, readiness signals.</div>
+          </div>
+          <div class="arch-cell">
+            <div class="arch-cell-label">03</div>
+            <div class="arch-cell-title">Your bloodwork</div>
+            <div class="arch-cell-body">Lab marker movement vs. corpus-expected response.</div>
+          </div>
+          <div class="arch-cell">
+            <div class="arch-cell-label">04</div>
+            <div class="arch-cell-title">Your training</div>
+            <div class="arch-cell-body">Split, days/week, exercise history, load progression.</div>
+          </div>
+        </div>
+
+        <div class="arch-connector"></div>
+
+        <p class="eyebrow-muted" style="margin-bottom: 4px;">Engines</p>
+        <div class="arch-row r3">
+          <div class="arch-cell engine">
+            <div class="arch-cell-label">Workout Engine</div>
+            <div class="arch-cell-body" style="font-size: 14px; color: var(--text);">Adjusts sets, reps, exercise filtering by active compounds.</div>
+          </div>
+          <div class="arch-cell engine">
+            <div class="arch-cell-label">Nutrition Engine</div>
+            <div class="arch-cell-body" style="font-size: 14px; color: var(--text);">Pharma-adjusted TDEE, macros, appetite signals per compound class.</div>
+          </div>
+          <div class="arch-cell engine">
+            <div class="arch-cell-label">PK Engine</div>
+            <div class="arch-cell-body" style="font-size: 14px; color: var(--text);">Models compound blood levels over time, dose timing, interaction windows.</div>
+          </div>
+        </div>
+
+        <div class="arch-connector"></div>
+
+        <p class="eyebrow-muted" style="margin-bottom: 4px;">AI layer</p>
+        <div class="arch-row r1">
+          <div class="arch-cell ai">
+            <div class="arch-cell-label">Coaching layer</div>
+            <div class="arch-cell-body" style="font-size: 14px; color: var(--text);">Citation-grounded coaching. Reads corpus + bloodwork + signals + history. Cites every claim.</div>
+          </div>
+        </div>
+
+        <div class="arch-connector"></div>
+
+        <p class="eyebrow-muted" style="margin-bottom: 4px;">Foundation</p>
+        <div class="arch-row r1">
+          <div class="arch-cell corpus">
+            <div class="arch-cell-label">The Corpus</div>
+            <div class="arch-cell-body" style="font-size: 14px; color: var(--text);">Published-research database of 100+ compounds. Dose ranges, cycle ranges, safety flags, expected lab marker movement. Updated continuously.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Engine 1 — Workout -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Engine 01 · Workout</p>
+        <h2>Reads your cabinet. Writes your day.</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          <p style="font-size: 16px; color: var(--text-secondary); line-height: 1.6;">
+            Reads your active cabinet. Filters exercises by pharma caution tags. Adjusts session length and volume by your check-in scores AND active compounds. Suggests intent based on yesterday's RPE.
+          </p>
+          <ul class="bullets">
+            <li>128 exercises tagged for GLP-1 nausea, beta-blocker HR cap, cortisol spike sensitivity</li>
+            <li>Auto-generates a session based on your split, days/week, and active compounds</li>
+            <li>Adapts in real-time as your cabinet changes</li>
+          </ul>
+        </div>
+        <div class="card card-amber">
+          <p class="eyebrow" style="color: var(--amber);">Why this matters</p>
+          <p style="color: var(--text); font-size: 15px; line-height: 1.55;">
+            A GLP-1 user shouldn't be programmed for a high-volume nausea-trigger session. A beta-blocker user shouldn't be programmed for sprint intervals at 95% HR max. The engine knows.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Engine 2 — Nutrition -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Engine 02 · Nutrition</p>
+        <h2>TDEE with per-compound modifiers.</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          <p style="font-size: 16px; color: var(--text-secondary); line-height: 1.6;">
+            Computes TDEE with per-compound modifiers. T3 +12%. Beta-blockers −6%. Clenbuterol +9%. GLP-1 modifies appetite signal independently. Macros auto-adjust as you add or remove compounds.
+          </p>
+          <ul class="bullets">
+            <li>Mifflin-St Jeor baseline with activity multiplier</li>
+            <li>Pharma TDEE modifiers per published research</li>
+            <li>Appetite-floor logic for GLP-1 users (suggests minimum protein even when appetite-suppressed)</li>
+          </ul>
+          <div class="row">
+            <span class="pill pill-cyan"><span class="dot"></span>T3 +12%</span>
+            <span class="pill pill-cyan"><span class="dot"></span>Beta-blockers −6%</span>
+            <span class="pill pill-cyan"><span class="dot"></span>Clen +9%</span>
+            <span class="pill pill-cyan"><span class="dot"></span>GLP-1 appetite</span>
+          </div>
+        </div>
+        <div class="card card-amber">
+          <p class="eyebrow" style="color: var(--amber);">Why this matters</p>
+          <p style="color: var(--text); font-size: 15px; line-height: 1.55;">
+            A Semaglutide user who eats to appetite loses muscle. A T3 user who eats baseline TDEE crashes. The math knows.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Engine 3 — PK -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Engine 03 · Pharmacokinetics</p>
+        <h2>Single-compartment. C = D/V × e<sup style="font-size: 0.55em; top: -0.55em; position: relative;">−ke·t</sup></h2>
+      </div>
+      <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          <p style="font-size: 16px; color: var(--text-secondary); line-height: 1.6;">
+            Standard single-compartment model. Models when each compound peaks and troughs. Overlays multiple compounds on one chart to show when the full stack peaks simultaneously.
+          </p>
+          <ul class="bullets">
+            <li>Half-life data per compound from published research</li>
+            <li>Educational approximation (clearly disclaimed in-app)</li>
+            <li>Visualizes interaction windows for stacked compounds</li>
+          </ul>
+        </div>
+        <div class="card card-amber">
+          <p class="eyebrow" style="color: var(--amber);">Why this matters</p>
+          <p style="color: var(--text); font-size: 15px; line-height: 1.55;">
+            Knowing your BPC-157 peaks at hour 4 and your TB-500 peaks at hour 16 changes when you train, when you dose, and when you stack. The math knows.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Corpus -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">The corpus</p>
+        <h2>100+ compounds. Every claim cited.</h2>
+      </div>
+      <p class="lead" style="max-width: 72ch;">
+        The corpus is a structured research database with published dose ranges, cycle ranges, safety flags, expected lab marker movement, sex-specific guidance, evidence quality grading, and WADA-banned status. AI is required to cite a corpus entry for any compound-related claim. Out-of-corpus → flagged. Out-of-range → flagged.
+      </p>
+      <div class="row" style="margin-top: 28px;">
+        <span class="pill"><span class="dot" style="color: var(--green);"></span>strong_human_data</span>
+        <span class="pill"><span class="dot" style="color: var(--green);"></span>limited_human_data</span>
+        <span class="pill"><span class="dot" style="color: var(--amber);"></span>animal_only</span>
+        <span class="pill"><span class="dot" style="color: var(--amber);"></span>preclinical_only</span>
+        <span class="pill"><span class="dot" style="color: var(--red);"></span>theoretical</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Does / doesn't -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What the AI does — and what it doesn't</p>
+        <h2>A clear line. Drawn on purpose.</h2>
+      </div>
+      <div class="does-grid">
+        <div class="does-col">
+          <p class="does-head yes">✓ Does</p>
+          <ul class="does-list">
+            <li>Generates workout programming from your stack</li>
+            <li>Sets macro numbers on the engine's TDEE math</li>
+            <li>Interprets bloodwork against corpus-expected response</li>
+            <li>Coaches via citation and synthesizes the daily brief</li>
+            <li>Flags out-of-corpus claims and stops itself</li>
+          </ul>
+        </div>
+        <div class="does-col">
+          <p class="does-head no">✗ Never does</p>
+          <ul class="does-list">
+            <li>Recommends prescription dose changes</li>
+            <li>Diagnoses conditions</li>
+            <li>Invents numbers the corpus can't support</li>
+            <li>Says "consult your doctor" as an escape hatch</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footnote -->
+  <section style="padding: 48px 0;">
+    <div class="container">
+      <p style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary); letter-spacing: 0.4px; max-width: 72ch; line-height: 1.6;">
+        Educational tool only. Not a substitute for medical advice. Always confirm with your clinician before changing your protocol.
+      </p>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="nav-brand" style="display: inline-block; margin-bottom: 12px;">proto<b>comp</b></a>
+          <p class="footer-tag">Protocol-aware training system.</p>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.5px;">© 2026 ProtoComp</p>
+        </div>
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="tech.html">Tech</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="tools.html">Free Tools</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">Deterministic math · Citation-grounded AI · No guesswork</div>
+    </div>
+  </footer>
+</body>
+</html>
