@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProtoComp — Peptide-aware training system</title>
+  <meta name="description" content="Your peptides change how your body works. Your fitness app should know that. ProtoComp adapts workouts, macros, and coaching to your active stack." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-screen-label="Home">
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">proto<b>comp</b></a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="tech.html">Tech</a>
+        <a href="faq.html">FAQ</a>
+        <a href="tools.html">Free Tools</a>
+        <a href="#waitlist" class="nav-cta">Waitlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Peptide-aware training system</p>
+        <h1>Your peptides change how your body works. Your app should know that.</h1>
+        <p class="lead">ProtoComp reads your active stack and rewrites today's training, macros, and coaching around it. Deterministic math you can trust — AI that actually knows what you're on.</p>
+        <div class="hero-ctas">
+          <a href="#waitlist" class="btn btn-primary">Join the waitlist</a>
+          <a href="reconstitution.html" class="btn btn-secondary">Reconstitution calculator</a>
+        </div>
+        <p class="hero-meta"><span class="live" aria-hidden="true"></span>iOS + Android · launching soon</p>
+      </div>
+
+      <div class="console" role="img" aria-label="ProtoComp daily brief: active stack and today's deterministic training adjustments">
+        <div class="console-bar">
+          <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="console-title"><b>proto</b>comp · daily brief</span>
+          <span class="console-meta">MON 06:14</span>
+        </div>
+
+        <div class="console-section">
+          <p class="console-label">Active stack — 3 compounds</p>
+          <div class="cmp-row">
+            <span class="cmp-dot cyan" aria-hidden="true"></span>
+            <span class="cmp-name">Testosterone E <span>anabolic</span></span>
+            <span class="cmp-dose">120 mg / wk</span>
+          </div>
+          <div class="cmp-row">
+            <span class="cmp-dot amber" aria-hidden="true"></span>
+            <span class="cmp-name">Semaglutide <span>GLP-1</span></span>
+            <span class="cmp-dose">0.5 mg / wk</span>
+          </div>
+          <div class="cmp-row">
+            <span class="cmp-dot green" aria-hidden="true"></span>
+            <span class="cmp-name">BPC-157 <span>repair</span></span>
+            <span class="cmp-dose">250 mcg / day</span>
+          </div>
+        </div>
+
+        <div class="console-section">
+          <p class="console-label">Today's adjustments — computed</p>
+          <div class="adj-row">
+            <span class="adj-key">Training volume<small>GLP-1 nausea window · day 2</small></span>
+            <span class="adj-val down">−15%</span>
+          </div>
+          <div class="adj-row">
+            <span class="adj-key">Energy target<small>TDEE 2,540 · net modifier +0%</small></span>
+            <span class="adj-val neutral">2,540 kcal</span>
+          </div>
+          <div class="adj-row">
+            <span class="adj-key">Protein floor<small>appetite-suppressed · hold the floor</small></span>
+            <span class="adj-val">180 g</span>
+          </div>
+          <div class="adj-row">
+            <span class="adj-key">Session cap<small>recovery-weighted</small></span>
+            <span class="adj-val">45 min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">The problem</p>
+        <h2>You're spending $300/month on peptides. Your fitness app thinks you're a normal lifter.</h2>
+      </div>
+      <p class="lead" style="max-width: 70ch;">
+        Generic apps don't account for GLP-1 appetite suppression, T3 metabolic acceleration, testosterone-driven anabolic windows, or peptide recovery timing. They program you like the compound doesn't exist. Your coach guesses. You under-recover, over-eat, or under-eat — and the months you're paying for don't compound the way they should.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What we built instead</p>
+        <h2>Deterministic engines, stack-aware AI, one coach dashboard.</h2>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <p class="eyebrow">Workout Engine</p>
+          <h3>Your stack modifies your sets, reps, and exercise selection.</h3>
+          <p>Active compounds change what gets programmed. GLP-1 nausea filters high-volume sessions. Beta-blockers cap sprint intervals. T3 raises session length. The engine reads your cabinet before it writes your day.</p>
+          <div class="card-footer">128 exercises · pharma-tagged</div>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Nutrition Engine</p>
+          <h3>Macros that adapt to GLP-1, T3, anabolics, clen.</h3>
+          <p>Mifflin-St Jeor baseline, then per-compound TDEE modifiers from published research. T3 up 12%. Beta-blockers down 6%. GLP-1 modifies the appetite signal independently of the math, so you don't slide into a protein-floor crash.</p>
+          <div class="card-footer">TDEE math · per-compound modifiers</div>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Coach Watchtower</p>
+          <h3>Coaches monitor at-risk clients with compound-aware alerts.</h3>
+          <p>One screen. Every client. Out-of-range protocols, lab signal contradictions, missed check-ins surface before the next call. Generic platforms can't flag what they can't see — we built this around what they're actually taking.</p>
+          <div class="card-footer">Out-of-range alerts · lab signal monitoring</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Built from published research</p>
+        <h2>The numbers, before the marketing.</h2>
+      </div>
+      <div class="grid-3">
+        <div class="stat">
+          <div class="stat-number">400+</div>
+          <div class="stat-label"><strong class="text-primary">Compounds</strong> — peptide-first database, continuously updated.</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">128</div>
+          <div class="stat-label"><strong class="text-primary">Exercises</strong> — pharma-cautioned and movement-tagged.</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">3</div>
+          <div class="stat-label"><strong class="text-primary">Deterministic engines</strong> — workout, nutrition, pharmacokinetics.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What we ship</p>
+        <h2>Peptide-first launch.</h2>
+      </div>
+      <p class="lead" style="max-width: 72ch;">
+        Coverage at launch: peptides (BPC-157, TB-500, Ipamorelin, CJC-1295, growth-hormone peptides, repair peptides, nootropic peptides), GLP-1 agonists, testosterone (all esters + creams), SARMs, ancillaries (HCG, Anastrozole, Clomid, Nolvadex, Enclomiphene), fat-loss compounds (Clenbuterol, T3/T4), insulin, and Metformin.
+      </p>
+      <div class="row" style="margin-top: 28px;">
+        <span class="pill pill-cyan"><span class="dot"></span>Peptides</span>
+        <span class="pill pill-cyan"><span class="dot"></span>GLP-1s</span>
+        <span class="pill pill-cyan"><span class="dot"></span>Testosterone</span>
+        <span class="pill pill-cyan"><span class="dot"></span>SARMs</span>
+        <span class="pill pill-cyan"><span class="dot"></span>Ancillaries</span>
+        <span class="pill pill-cyan"><span class="dot"></span>Fat-loss</span>
+        <span class="pill pill-cyan"><span class="dot"></span>Insulin</span>
+        <span class="pill pill-cyan"><span class="dot"></span>Metformin</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Free tools</p>
+        <h2>No login. No paywall.</h2>
+      </div>
+      <div class="grid-2">
+        <a href="reconstitution.html" class="card card-link" style="text-decoration: none;">
+          <p class="eyebrow">Reconstitution Calculator</p>
+          <h3>Compute concentration, draw units, days supply.</h3>
+          <p>BPC-157, Semaglutide, Ipamorelin presets included. Insulin or standard syringe. Real-time as you type.</p>
+          <div class="card-footer text-cyan" style="color: var(--cyan);">Open calculator →</div>
+        </a>
+        <article class="card card-soon">
+          <p class="eyebrow">Compound Interaction Checker</p>
+          <h3>Cross-reference your stack for known interactions.</h3>
+          <p>Surface PK-overlap windows, contraindications, and stack-level cautions. Sourced from the same corpus the app uses.</p>
+          <div class="card-footer">Ships after launch</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="waitlist">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Be first</p>
+        <h2>Get the launch link first.</h2>
+      </div>
+      <form id="waitlist-form" class="waitlist-form">
+        <input class="input" type="email" required placeholder="you@domain.com" aria-label="Email" />
+        <button class="btn btn-primary" type="submit">Join</button>
+      </form>
+      <p class="waitlist-state mono" style="font-size: 12px; color: var(--green); margin-top: 12px; min-height: 1em; letter-spacing: 0.5px;"></p>
+      <p style="margin-top: 16px; font-size: 13px; color: var(--text-tertiary); max-width: 50ch;">
+        We email you the App Store + Play Store links the day they go live. No spam. Unsubscribe anytime.
+      </p>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="nav-brand" style="display: inline-block; margin-bottom: 12px;">proto<b>comp</b></a>
+          <p class="footer-tag">Protocol-aware training system.</p>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.5px;">© 2026 ProtoComp</p>
+        </div>
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="tech.html">Tech</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="tools.html">Free Tools</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">Deterministic math · Citation-grounded AI · No guesswork</div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      var f = document.getElementById('waitlist-form');
+      if (!f) return;
+      f.addEventListener('submit', function(e){
+        e.preventDefault();
+        var input = f.querySelector('input');
+        var state = document.querySelector('.waitlist-state');
+        if (state) state.textContent = "You're on the list.";
+        if (input) input.value = '';
+      });
+    })();
+  </script>
+</body>
+</html>
