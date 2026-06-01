@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peptide Encyclopedia (Beta) — ProtoComp</title>
+  <meta name="description" content="A free, source-backed reference of peptides and compounds — mechanism, routes, safety flags, legal status, and evidence quality. Educational only." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .enc-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .enc-search {
+      width: 100%;
+      max-width: 480px;
+      background: var(--surface);
+      border: 1px solid var(--border-medium);
+      border-radius: 12px;
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      padding: 13px 16px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .enc-search:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 3px var(--cyan-soft); }
+    .enc-search::placeholder { color: var(--text-tertiary); }
+    .enc-filters { display: flex; gap: 6px; flex-wrap: wrap; }
+    .enc-chip {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 6px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .enc-chip:hover { border-color: var(--border-medium); color: var(--text); }
+    .enc-chip.active { background: var(--cyan-soft); border-color: var(--cyan); color: var(--cyan); }
+    .enc-count { font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary); letter-spacing: 0.4px; }
+
+    .enc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 14px;
+    }
+    .enc-card {
+      background: var(--surface-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-md);
+      padding: 18px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .enc-card:hover { border-color: var(--cyan); transform: translateY(-1px); }
+    .enc-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .enc-card-name { font-weight: 600; font-size: 16px; color: var(--text); }
+    .enc-card-cat {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--text-tertiary); white-space: nowrap;
+    }
+    .enc-card-mech {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .ev-badge {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.5px;
+      padding: 2px 7px; border-radius: 5px; white-space: nowrap; align-self: flex-start;
+    }
+    .ev-strong   { color: var(--green); border: 1px solid rgba(0,230,118,0.35); }
+    .ev-limited  { color: var(--green); border: 1px solid rgba(0,230,118,0.20); }
+    .ev-emerging { color: var(--amber); border: 1px solid rgba(255,171,0,0.30); }
+    .ev-pre      { color: var(--amber); border: 1px solid rgba(255,171,0,0.25); }
+    .ev-theo     { color: var(--red);   border: 1px solid rgba(255,61,61,0.30); }
+    .ev-unknown  { color: var(--text-tertiary); border: 1px solid var(--border-subtle); }
+
+    .enc-empty { color: var(--text-tertiary); font-family: var(--font-mono); font-size: 13px; padding: 40px 0; }
+
+    /* Detail view */
+    .enc-detail { max-width: 820px; }
+    .enc-back {
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.5px;
+      color: var(--cyan); cursor: pointer; display: inline-flex; gap: 6px; margin-bottom: 24px; background: none; border: none; padding: 0;
+    }
+    .enc-detail h1 { font-size: clamp(30px, 4vw, 40px); }
+    .enc-aliases { font-family: var(--font-mono); font-size: 13px; color: var(--text-tertiary); margin-top: 6px; }
+    .enc-meta-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0 8px; }
+    .enc-block { padding: 22px 0; border-top: 1px solid var(--border-subtle); }
+    .enc-block h3 { font-size: 15px; margin-bottom: 10px; }
+    .enc-block p, .enc-block li { color: var(--text-secondary); font-size: 14px; line-height: 1.6; }
+    .enc-block ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+    .enc-kv { display: grid; grid-template-columns: 200px 1fr; gap: 8px 20px; }
+    @media (max-width: 560px) { .enc-kv { grid-template-columns: 1fr; gap: 2px 0; } .enc-kv dt { margin-top: 8px; } }
+    .enc-kv dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.5px; color: var(--text-tertiary); text-transform: uppercase; }
+    .enc-kv dd { margin: 0; color: var(--text); font-size: 14px; }
+    .enc-null { color: var(--text-tertiary); font-style: italic; }
+    .enc-flag-yes { color: var(--red); }
+    .enc-flag-no { color: var(--green); }
+  </style>
+</head>
+<body data-screen-label="Peptide Encyclopedia">
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">proto<b>comp</b></a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="tech.html">Tech</a>
+        <a href="faq.html">FAQ</a>
+        <a href="tools.html" class="active">Tools<span class="beta">beta</span></a>
+        <a href="index.html#waitlist" class="nav-cta">Early access</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">Free tool · Beta</p>
+      <h1>Peptide Encyclopedia<span class="beta">beta</span></h1>
+      <p class="lead" style="margin-top: 16px;">A source-backed reference of peptides and compounds — mechanism, routes, safety flags, legal status, and evidence quality. Free and open.</p>
+    </div>
+  </header>
+
+  <section style="border-bottom: none;">
+    <div class="container">
+      <div id="enc-list">
+        <div class="enc-controls">
+          <input id="enc-search" class="enc-search" type="search" placeholder="Search compounds, aliases…" aria-label="Search compounds" />
+          <div class="enc-filters" id="enc-cats"></div>
+          <div class="enc-filters" id="enc-evidence"></div>
+          <div class="enc-count" id="enc-count"></div>
+        </div>
+        <div class="enc-grid" id="enc-grid"></div>
+        <div class="enc-empty" id="enc-empty" hidden>No compounds match your search.</div>
+      </div>
+      <div id="enc-detail-view" class="enc-detail" hidden></div>
+
+      <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.4px; max-width: 72ch; line-height: 1.6; margin-top: 48px;">
+        Educational reference only. Not medical advice, not a recommendation to use any compound. Dose, cycle, and safety data are shown only where source-backed; entries marked "not dose-curated yet" intentionally omit dosing until evidence is reviewed. Always consult a qualified clinician.
+      </p>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="nav-brand" style="display: inline-block; margin-bottom: 12px;">proto<b>comp</b></a>
+          <p class="footer-tag">Adaptive AI coaching for every athlete.</p>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.5px;">© 2026 ProtoComp</p>
+        </div>
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="tech.html">Tech</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="tools.html">Tools</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">AI-driven coaching · Deterministic fallback · Evidence over hype</div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    var listEl = document.getElementById('enc-list');
+    var detailEl = document.getElementById('enc-detail-view');
+    var gridEl = document.getElementById('enc-grid');
+    var emptyEl = document.getElementById('enc-empty');
+    var searchEl = document.getElementById('enc-search');
+    var catsEl = document.getElementById('enc-cats');
+    var evEl = document.getElementById('enc-evidence');
+    var countEl = document.getElementById('enc-count');
+
+    var DATA = { compounds: [], categories: [] };
+    var bySlug = {};
+    var state = { q: '', cat: 'all', ev: 'all' };
+
+    var EV = {
+      strong_human_data: { label: 'Strong human data', cls: 'ev-strong' },
+      limited_human_data: { label: 'Limited human data', cls: 'ev-limited' },
+      emerging: { label: 'Emerging', cls: 'ev-emerging' },
+      animal_only: { label: 'Animal data', cls: 'ev-pre' },
+      preclinical_only: { label: 'Preclinical', cls: 'ev-pre' },
+      preclinical: { label: 'Preclinical', cls: 'ev-pre' },
+      theoretical: { label: 'Theoretical', cls: 'ev-theo' }
+    };
+    function ev(meta) { return EV[meta] || { label: meta || 'Ungraded', cls: 'ev-unknown' }; }
+    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function titleCase(s) { return String(s || '').replace(/_/g, ' ').replace(/\b\w/g, function (m) { return m.toUpperCase(); }); }
+
+    function renderFilters() {
+      var cats = ['all'].concat(DATA.categories);
+      catsEl.innerHTML = cats.map(function (c) {
+        return '<button class="enc-chip' + (state.cat === c ? ' active' : '') + '" data-cat="' + esc(c) + '">' + esc(c === 'all' ? 'All categories' : c) + '</button>';
+      }).join('');
+      var evs = ['all', 'strong_human_data', 'limited_human_data', 'emerging', 'preclinical_only', 'theoretical'];
+      evEl.innerHTML = evs.map(function (e) {
+        return '<button class="enc-chip' + (state.ev === e ? ' active' : '') + '" data-ev="' + esc(e) + '">' + esc(e === 'all' ? 'All evidence' : ev(e).label) + '</button>';
+      }).join('');
+    }
+
+    function matches(c) {
+      if (state.cat !== 'all' && c.category !== state.cat) return false;
+      if (state.ev !== 'all' && c.evidenceQuality !== state.ev) return false;
+      if (state.q) {
+        var hay = (c.name + ' ' + (c.aliases || []).join(' ')).toLowerCase();
+        if (hay.indexOf(state.q) === -1) return false;
+      }
+      return true;
+    }
+
+    function renderList() {
+      var items = DATA.compounds.filter(matches);
+      countEl.textContent = items.length + ' of ' + DATA.compounds.length + ' compounds';
+      emptyEl.hidden = items.length !== 0;
+      gridEl.innerHTML = items.map(function (c) {
+        var e = ev(c.evidenceQuality);
+        var mech = c.mechanismOfAction || 'No description available.';
+        return '<button class="enc-card" data-slug="' + esc(c.slug) + '">' +
+          '<div class="enc-card-top"><span class="enc-card-name">' + esc(c.name) + '</span>' +
+          '<span class="enc-card-cat">' + esc(c.category) + '</span></div>' +
+          '<span class="ev-badge ' + e.cls + '">' + esc(e.label) + '</span>' +
+          '<span class="enc-card-mech">' + esc(mech) + '</span>' +
+          '</button>';
+      }).join('');
+    }
+
+    function row(dt, dd, isNull) {
+      return '<dt>' + esc(dt) + '</dt><dd' + (isNull ? ' class="enc-null"' : '') + '>' + (isNull ? esc(dd) : dd) + '</dd>';
+    }
+    function listBlock(title, arr) {
+      if (!arr || !arr.length) return '';
+      return '<div class="enc-block"><h3>' + esc(title) + '</h3><ul>' +
+        arr.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>';
+    }
+
+    function renderDetail(slug) {
+      var c = bySlug[slug];
+      if (!c) { location.hash = ''; return; }
+      var e = ev(c.evidenceQuality);
+      var sf = c.safetyFlags || {};
+      var ls = c.legalStatus || {};
+      var tm = c.timing || {};
+      var sx = c.sexSpecificGuidance || {};
+      var dose = c.publishedDoseRange;
+      var cycle = c.publishedCycleRange;
+      var freq = c.publishedFrequency;
+
+      var html = '<button class="enc-back" id="enc-back">← All compounds</button>' +
+        '<p class="eyebrow">' + esc(c.category) + '</p>' +
+        '<h1>' + esc(c.name) + '</h1>' +
+        ((c.aliases && c.aliases.length) ? '<p class="enc-aliases">Also known as: ' + esc(c.aliases.join(', ')) + '</p>' : '') +
+        '<div class="enc-meta-row"><span class="ev-badge ' + e.cls + '">' + esc(e.label) + '</span>' +
+        (ls.wadaBanned ? '<span class="pill pill-amber"><span class="dot"></span>WADA banned</span>' : '') +
+        (ls.fdaApproved ? '<span class="pill pill-cyan"><span class="dot"></span>FDA approved</span>' : '') +
+        (ls.researchOnly ? '<span class="pill"><span class="dot"></span>Research only</span>' : '') + '</div>';
+
+      if (c.mechanismOfAction) {
+        html += '<div class="enc-block"><h3>Mechanism</h3><p>' + esc(c.mechanismOfAction) + '</p></div>';
+      }
+
+      html += '<div class="enc-block"><h3>Protocol reference</h3><dl class="enc-kv">' +
+        row('Routes', (c.routes && c.routes.length) ? esc(c.routes.map(titleCase).join(', ')) : 'Not specified', !(c.routes && c.routes.length)) +
+        row('Published dose', dose ? esc(dose) : 'Not dose-curated yet', !dose) +
+        row('Published cycle', cycle ? esc(cycle) : 'Not dose-curated yet', !cycle) +
+        row('Frequency', freq ? esc(freq) : 'Not specified', !freq) +
+        (tm.preferredTiming ? row('Preferred timing', esc(tm.preferredTiming)) : '') +
+        (tm.notes ? row('Timing notes', esc(tm.notes)) : '') +
+        '</dl></div>';
+
+      html += listBlock('Contraindications', sf.contraindications);
+      html += listBlock('Common side effects', sf.commonSideEffects);
+      html += listBlock('Serious risks', sf.seriousRisks);
+      html += listBlock('Drug interactions', sf.drugInteractions);
+      html += listBlock('Requires monitoring', sf.requiresMonitoring);
+      if (sf.pregnancyBreastfeeding) {
+        html += '<div class="enc-block"><h3>Pregnancy &amp; breastfeeding</h3><p>' + esc(sf.pregnancyBreastfeeding) + '</p></div>';
+      }
+      if (sx.hasDifferences && (sx.maleNotes || sx.femaleNotes)) {
+        html += '<div class="enc-block"><h3>Sex-specific guidance</h3>' +
+          (sx.maleNotes ? '<p><strong class="text-primary">Male:</strong> ' + esc(sx.maleNotes) + '</p>' : '') +
+          (sx.femaleNotes ? '<p style="margin-top:8px"><strong class="text-primary">Female:</strong> ' + esc(sx.femaleNotes) + '</p>' : '') + '</div>';
+      }
+      html += listBlock('Common stacks', c.commonStacks);
+      html += listBlock('Stack warnings', c.stackWarnings);
+      html += listBlock('Common misconceptions', c.commonMisconceptions);
+
+      if (c.injectable) {
+        html += '<div class="enc-block"><h3>Reconstitution</h3><p>This is an injectable compound. Use the free <a href="reconstitution.html" style="color:var(--cyan)">reconstitution calculator</a> to compute concentration and units to draw.</p></div>';
+      }
+
+      detailEl.innerHTML = html;
+      document.getElementById('enc-back').addEventListener('click', function () { location.hash = ''; });
+      window.scrollTo(0, 0);
+    }
+
+    function route() {
+      var slug = (location.hash || '').replace(/^#\/?/, '');
+      if (slug && bySlug[slug]) {
+        listEl.hidden = true; detailEl.hidden = false; renderDetail(slug);
+      } else {
+        detailEl.hidden = true; listEl.hidden = false;
+      }
+    }
+
+    searchEl.addEventListener('input', function () { state.q = searchEl.value.trim().toLowerCase(); renderList(); });
+    catsEl.addEventListener('click', function (e) { var b = e.target.closest('[data-cat]'); if (!b) return; state.cat = b.getAttribute('data-cat'); renderFilters(); renderList(); });
+    evEl.addEventListener('click', function (e) { var b = e.target.closest('[data-ev]'); if (!b) return; state.ev = b.getAttribute('data-ev'); renderFilters(); renderList(); });
+    gridEl.addEventListener('click', function (e) { var b = e.target.closest('[data-slug]'); if (!b) return; location.hash = '/' + b.getAttribute('data-slug'); });
+    window.addEventListener('hashchange', route);
+
+    fetch('data/peptides.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        DATA = d;
+        d.compounds.forEach(function (c) { bySlug[c.slug] = c; });
+        renderFilters(); renderList(); route();
+      })
+      .catch(function () {
+        gridEl.innerHTML = '<p class="enc-empty">Could not load the compound library. Please try again.</p>';
+      });
+  })();
+  </script>
+</body>
+</html>

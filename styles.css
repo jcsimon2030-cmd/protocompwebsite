@@ -884,3 +884,23 @@ footer.site {
   font-size: 14px;
   white-space: nowrap;
 }
+
+/* ─────────────────────────────────────────
+   Beta badge (nav + headings)
+   ───────────────────────────────────────── */
+
+.beta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--amber);
+  border: 1px solid rgba(255, 171, 0, 0.35);
+  border-radius: 5px;
+  padding: 1px 5px;
+  margin-left: 6px;
+  vertical-align: middle;
+  line-height: 1.4;
+}

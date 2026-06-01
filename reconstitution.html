@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reconstitution Calculator — ProtoComp</title>
+  <meta name="description" content="Compute concentration, units to draw, and days supply. Free. No login." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── Calculator-specific ── */
+    .calc-shell {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 880px) { .calc-grid { grid-template-columns: 1fr; } }
+
+    .calc-card {
+      background: var(--surface-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .field-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+    .field-input-row {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+    }
+    .field-input-row .input { flex: 1; min-width: 0; }
+
+    .unit-toggle {
+      display: inline-flex;
+      border: 1px solid var(--border-medium);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .unit-toggle button {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.8px;
+      padding: 0 14px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .unit-toggle button.active {
+      background: var(--cyan);
+      color: #000;
+      font-weight: 600;
+    }
+
+    .presets {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .preset {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .preset:hover {
+      border-color: var(--border-medium);
+      color: var(--text);
+    }
+    .preset.active {
+      background: var(--cyan-soft);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .radio-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .radio-card {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      transition: all 0.15s;
+    }
+    .radio-card:hover { border-color: var(--border-medium); }
+    .radio-card.active {
+      border-color: var(--cyan);
+      background: var(--cyan-soft);
+    }
+    .radio-card-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .radio-card-sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.5px;
+    }
+
+    .select {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border-medium);
+      border-radius: 12px;
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      padding: 13px 16px;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%2300E5FF' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+    .select:focus { outline: none; border-color: var(--cyan); }
+
+    /* ── Output panel ── */
+    .out-card {
+      background: var(--surface-raised);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--r-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: sticky;
+      top: 84px;
+    }
+    @media (max-width: 880px) { .out-card { position: static; } }
+
+    .out-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 24px;
+    }
+    .out-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-md);
+    }
+    .out-item.primary {
+      grid-column: span 2;
+      background: rgba(0, 229, 255, 0.04);
+      border-color: rgba(0, 229, 255, 0.30);
+    }
+    .out-num {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--cyan);
+      font-size: 32px;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    .out-item.primary .out-num { font-size: 44px; }
+    .out-num .sub {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      font-weight: 400;
+      letter-spacing: 0.2px;
+      margin-left: 4px;
+    }
+    .out-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+    .out-secondary {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-secondary);
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Syringe SVG ── */
+    .syringe-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-md);
+      padding: 24px 20px;
+    }
+    .syringe-wrap svg { width: 100%; height: auto; }
+    .syringe-readout {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-top: 14px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+    .syringe-readout .units {
+      color: var(--cyan);
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .syringe-readout .label {
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+    }
+
+    .input-error {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      color: var(--amber);
+      min-height: 14px;
+    }
+
+    /* presets row spacing */
+    .preset-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body data-screen-label="Reconstitution Calculator">
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">proto<b>comp</b></a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="tech.html">Tech</a>
+        <a href="faq.html">FAQ</a>
+        <a href="tools.html" class="active">Tools<span class="beta">beta</span></a>
+        <a href="index.html#waitlist" class="nav-cta">Early access</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">Free tool · Beta</p>
+      <h1>Reconstitution calculator.<span class="beta">beta</span></h1>
+      <p class="lead" style="margin-top: 16px;">Concentration. Units to draw. Days supply. Updates as you type.</p>
+    </div>
+  </header>
+
+  <section style="border-bottom: none;">
+    <div class="calc-shell">
+      <div class="calc-grid">
+
+        <!-- ───── Inputs ───── -->
+        <div class="calc-card">
+
+          <!-- Compound (from catalog) -->
+          <div class="field">
+            <label class="field-label" for="compound">Compound <span style="color: var(--text-tertiary); font-weight: 400;">(optional)</span></label>
+            <select id="compound" class="select">
+              <option value="">Generic — enter values manually</option>
+            </select>
+            <p id="compound-link" class="preset-row" style="min-height: 14px; margin-top: 4px;"></p>
+          </div>
+
+          <!-- Peptide amount -->
+          <div class="field">
+            <label class="field-label" for="vial-mg">Peptide amount in vial</label>
+            <div class="field-input-row">
+              <input id="vial-mg" class="input mono" type="number" min="0" step="0.1" value="5" />
+              <span class="input" style="flex: 0 0 auto; width: 64px; text-align: center; color: var(--text-tertiary); font-family: var(--font-mono);">mg</span>
+            </div>
+            <div class="preset-row">
+              <div class="presets" data-preset-target="vial-mg">
+                <button type="button" class="preset" data-val="2">2</button>
+                <button type="button" class="preset" data-val="5">5</button>
+                <button type="button" class="preset" data-val="10">10</button>
+                <button type="button" class="preset" data-val="15">15</button>
+                <button type="button" class="preset" data-val="30">30</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- BAC water -->
+          <div class="field">
+            <label class="field-label" for="bac-ml">BAC water added</label>
+            <div class="field-input-row">
+              <input id="bac-ml" class="input mono" type="number" min="0" step="0.1" value="2" />
+              <span class="input" style="flex: 0 0 auto; width: 64px; text-align: center; color: var(--text-tertiary); font-family: var(--font-mono);">mL</span>
+            </div>
+            <div class="presets" data-preset-target="bac-ml">
+              <button type="button" class="preset" data-val="1">1</button>
+              <button type="button" class="preset" data-val="2">2</button>
+              <button type="button" class="preset" data-val="3">3</button>
+              <button type="button" class="preset" data-val="5">5</button>
+            </div>
+          </div>
+
+          <!-- Desired dose -->
+          <div class="field">
+            <label class="field-label" for="dose">Desired dose</label>
+            <div class="field-input-row">
+              <input id="dose" class="input mono" type="number" min="0" step="1" value="250" />
+              <div class="unit-toggle" role="group" aria-label="Dose units">
+                <button type="button" id="unit-mcg" class="active">mcg</button>
+                <button type="button" id="unit-mg">mg</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Syringe -->
+          <div class="field">
+            <label class="field-label">Syringe</label>
+            <div class="radio-group" role="radiogroup">
+              <div class="radio-card active" data-syringe="insulin" role="radio" aria-checked="true" tabindex="0">
+                <div class="radio-card-title">Insulin</div>
+                <div class="radio-card-sub">100 u/mL · 1 mL</div>
+              </div>
+              <div class="radio-card" data-syringe="standard" role="radio" aria-checked="false" tabindex="0">
+                <div class="radio-card-title">Standard</div>
+                <div class="radio-card-sub">graduated in mL</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Frequency -->
+          <div class="field">
+            <label class="field-label" for="freq">Frequency</label>
+            <select id="freq" class="select">
+              <option value="1">Daily</option>
+              <option value="2">2× daily</option>
+              <option value="0.5">Every other day (EOD)</option>
+              <option value="0.2857">2× weekly</option>
+              <option value="0.1429">Weekly</option>
+            </select>
+          </div>
+
+          <p class="input-error" id="err"></p>
+        </div>
+
+        <!-- ───── Outputs ───── -->
+        <div class="out-card">
+
+          <div class="syringe-wrap" aria-label="Syringe fill visualization">
+            <svg viewBox="0 0 520 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Syringe diagram">
+              <!-- Definitions -->
+              <defs>
+                <clipPath id="barrel-clip">
+                  <rect x="100" y="56" width="340" height="32" rx="4" />
+                </clipPath>
+              </defs>
+
+              <!-- Plunger thumb rest -->
+              <rect x="20" y="38" width="6" height="68" rx="2" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+              <!-- Plunger shaft (moves) -->
+              <g id="plunger">
+                <rect x="26" y="62" width="58" height="20" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+                <line x1="55" y1="62" x2="55" y2="82" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+                <!-- plunger head (in barrel) -->
+                <rect x="78" y="58" width="10" height="28" fill="#0A0A0A" stroke="var(--cyan)" stroke-width="1.5" />
+              </g>
+
+              <!-- Barrel outer -->
+              <rect x="100" y="56" width="340" height="32" rx="4" fill="none" stroke="rgba(255,255,255,0.50)" stroke-width="1.5" />
+
+              <!-- Cyan fill (drug) -->
+              <rect id="fill" x="100" y="58" width="0" height="28" fill="rgba(0,229,255,0.25)" clip-path="url(#barrel-clip)" />
+              <rect id="fill-edge" x="100" y="58" width="2" height="28" fill="#00E5FF" clip-path="url(#barrel-clip)" />
+
+              <!-- Tick marks (10 major, 100 minor on insulin) -->
+              <g id="ticks" stroke="rgba(255,255,255,0.55)" stroke-width="1"></g>
+              <g id="tick-labels" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(255,255,255,0.5)"></g>
+
+              <!-- Needle hub -->
+              <rect x="440" y="62" width="14" height="20" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" />
+              <!-- Needle -->
+              <line x1="454" y1="72" x2="498" y2="72" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" />
+              <line x1="498" y1="72" x2="492" y2="68" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" />
+              <line x1="498" y1="72" x2="492" y2="76" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" />
+            </svg>
+
+            <div class="syringe-readout">
+              <div>
+                <span class="units mono" id="syringe-units">25</span>
+                <span class="label" id="syringe-unit-label" style="margin-left: 6px;">units</span>
+              </div>
+              <div class="label" id="syringe-volume">0.25 mL drawn</div>
+            </div>
+          </div>
+
+          <div class="out-grid">
+            <div class="out-item primary">
+              <div class="out-num"><span id="o-units">25</span><span class="sub" id="o-units-sub">units</span></div>
+              <div class="out-label">Units to draw</div>
+            </div>
+            <div class="out-item">
+              <div class="out-num"><span id="o-concentration">2500</span><span class="sub">mcg/unit</span></div>
+              <div class="out-label">Concentration</div>
+              <div class="out-secondary" id="o-concentration-mgml">2.5 mg/mL</div>
+            </div>
+            <div class="out-item">
+              <div class="out-num"><span id="o-doses">20</span><span class="sub">doses</span></div>
+              <div class="out-label">Doses per vial</div>
+            </div>
+            <div class="out-item" style="grid-column: span 2;">
+              <div class="out-num"><span id="o-days">20</span><span class="sub">days supply</span></div>
+              <div class="out-label">At <span id="o-freq-text" class="mono">daily</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Amber CTA banner -->
+      <div class="banner-amber" style="margin-top: 48px;">
+        <div class="banner-amber-body">
+          <strong style="color: var(--amber); font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; display: block; margin-bottom: 6px;">More than math</strong>
+          ProtoComp adapts your workouts based on your peptide stack. The calculator is one slice of what the engines do.
+        </div>
+        <a href="index.html#waitlist">Join the waitlist →</a>
+      </div>
+
+      <!-- Disclaimer -->
+      <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.4px; max-width: 72ch; line-height: 1.6; margin-top: 40px;">
+        Educational tool only. Not a substitute for medical advice. Confirm all reconstitution math with your clinician before injecting.
+      </p>
+    </div>
+  </section>
+
+  <footer class="site" style="margin-top: 64px;">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="nav-brand" style="display: inline-block; margin-bottom: 12px;">proto<b>comp</b></a>
+          <p class="footer-tag">Adaptive AI coaching for every athlete.</p>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.5px;">© 2026 ProtoComp</p>
+        </div>
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="tech.html">Tech</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="tools.html">Tools</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">AI-driven coaching · Deterministic fallback · Evidence over hype</div>
+    </div>
+  </footer>
+
+  <!-- Compound presets from the live catalog (optional context + encyclopedia link) -->
+  <script>
+  (function(){
+    var sel = document.getElementById('compound');
+    var link = document.getElementById('compound-link');
+    if (!sel) return;
+    fetch('data/calculator-presets.json')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        (d.presets || []).forEach(function(p){
+          var o = document.createElement('option');
+          o.value = p.slug; o.textContent = p.name;
+          sel.appendChild(o);
+        });
+        var bySlug = {};
+        (d.presets || []).forEach(function(p){ bySlug[p.slug] = p; });
+        sel.addEventListener('change', function(){
+          var p = bySlug[sel.value];
+          if (p) {
+            link.innerHTML = '<a href="peptides.html#/' + p.slug + '" style="font-family: var(--font-mono); font-size: 11px; color: var(--cyan); letter-spacing: 0.4px;">View ' + p.name.replace(/</g,'') + ' in the encyclopedia →</a>';
+          } else {
+            link.innerHTML = '';
+          }
+        });
+      })
+      .catch(function(){ /* presets are optional; calculator works without them */ });
+  })();
+  </script>
+
+  <script>
+  (function(){
+    // ── State ──────────────────────────────────────────
+    const state = {
+      vialMg: 5,
+      bacMl: 2,
+      dose: 250,
+      doseUnit: 'mcg',          // 'mcg' or 'mg'
+      syringe: 'insulin',       // 'insulin' or 'standard'
+      freqPerDay: 1,            // 1, 2, 0.5, 2/7, 1/7
+    };
+
+    // ── DOM ────────────────────────────────────────────
+    const $ = id => document.getElementById(id);
+    const vialMgEl = $('vial-mg');
+    const bacMlEl  = $('bac-ml');
+    const doseEl   = $('dose');
+    const unitMcgBtn = $('unit-mcg');
+    const unitMgBtn  = $('unit-mg');
+    const freqEl   = $('freq');
+    const errEl    = $('err');
+
+    const oUnits   = $('o-units');
+    const oUnitsSub= $('o-units-sub');
+    const oConc    = $('o-concentration');
+    const oConcMg  = $('o-concentration-mgml');
+    const oDoses   = $('o-doses');
+    const oDays    = $('o-days');
+    const oFreqText= $('o-freq-text');
+
+    const syringeUnits = $('syringe-units');
+    const syringeUnitLabel = $('syringe-unit-label');
+    const syringeVolume = $('syringe-volume');
+    const fillRect = $('fill');
+    const fillEdge = $('fill-edge');
+    const plunger  = $('plunger');
+    const ticksG   = $('ticks');
+    const tickLabelsG = $('tick-labels');
+
+    // ── Helpers ────────────────────────────────────────
+    function fmt(n, decimals) {
+      if (!isFinite(n) || isNaN(n)) return '—';
+      if (decimals === undefined) {
+        if (n === 0) return '0';
+        if (Math.abs(n) >= 100) return Math.round(n).toLocaleString();
+        if (Math.abs(n) >= 10)  return n.toFixed(1);
+        if (Math.abs(n) >= 1)   return n.toFixed(2);
+        return n.toFixed(3);
+      }
+      return n.toFixed(decimals);
+    }
+    function fmtInt(n) { return isFinite(n) ? Math.floor(n).toLocaleString() : '—'; }
+
+    // ── Tick drawing ───────────────────────────────────
+    // Barrel x: 100→440 (340px). Insulin: 0→100 units, 10 majors.
+    // Standard: 0→1 mL, 10 majors at 0.1 mL.
+    function drawTicks() {
+      ticksG.innerHTML = '';
+      tickLabelsG.innerHTML = '';
+      const x0 = 100, x1 = 440;
+      const span = x1 - x0;
+      const majors = 10;
+      for (let i = 0; i <= majors; i++) {
+        const x = x0 + (span * i / majors);
+        const major = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        major.setAttribute('x1', x); major.setAttribute('x2', x);
+        major.setAttribute('y1', 88); major.setAttribute('y2', 96);
+        ticksG.appendChild(major);
+        // label
+        const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        txt.setAttribute('x', x);
+        txt.setAttribute('y', 108);
+        txt.setAttribute('text-anchor', 'middle');
+        if (state.syringe === 'insulin') {
+          txt.textContent = (i * 10).toString();
+        } else {
+          txt.textContent = (i / 10).toFixed(1);
+        }
+        tickLabelsG.appendChild(txt);
+      }
+      // minors between
+      const minors = 50;
+      for (let i = 0; i <= minors; i++) {
+        if (i % 5 === 0) continue;
+        const x = x0 + (span * i / minors);
+        const m = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        m.setAttribute('x1', x); m.setAttribute('x2', x);
+        m.setAttribute('y1', 88); m.setAttribute('y2', 92);
+        m.setAttribute('stroke-opacity', '0.5');
+        ticksG.appendChild(m);
+      }
+    }
+
+    // ── Core math ──────────────────────────────────────
+    function compute() {
+      const vialMg = Math.max(0, parseFloat(state.vialMg) || 0);
+      const bacMl  = Math.max(0, parseFloat(state.bacMl)  || 0);
+      const doseRaw = Math.max(0, parseFloat(state.dose) || 0);
+      const doseMg = state.doseUnit === 'mg' ? doseRaw : doseRaw / 1000;
+      const doseMcg = doseMg * 1000;
+
+      let error = '';
+      if (vialMg <= 0) error = 'Vial amount must be > 0';
+      else if (bacMl <= 0) error = 'BAC water must be > 0';
+      else if (doseMg <= 0) error = 'Dose must be > 0';
+      errEl.textContent = error;
+
+      const concMgMl = vialMg / bacMl;          // mg per mL
+      const concMcgMl = concMgMl * 1000;        // mcg per mL
+      const concMcgPerUnit = concMcgMl / 100;   // insulin: 1 unit = 0.01 mL
+
+      // dose volume in mL
+      const doseMl = doseMg / concMgMl;
+      // units to draw
+      const insulinUnits = doseMl * 100;
+      const doses = vialMg / doseMg;
+      const daysSupply = doses / state.freqPerDay;
+
+      // ── Update outputs
+      if (state.syringe === 'insulin') {
+        oUnits.textContent = fmt(insulinUnits);
+        oUnitsSub.textContent = 'units';
+        syringeUnits.textContent = fmt(insulinUnits);
+        syringeUnitLabel.textContent = 'units';
+      } else {
+        oUnits.textContent = fmt(doseMl);
+        oUnitsSub.textContent = 'mL';
+        syringeUnits.textContent = fmt(doseMl);
+        syringeUnitLabel.textContent = 'mL';
+      }
+      syringeVolume.textContent = fmt(doseMl) + ' mL drawn';
+
+      oConc.textContent = fmt(concMcgPerUnit);
+      oConcMg.textContent = fmt(concMgMl) + ' mg/mL';
+      oDoses.textContent = fmtInt(doses);
+      oDays.textContent  = fmtInt(daysSupply);
+
+      // ── Update syringe fill
+      const x0 = 100, x1 = 440;
+      const span = x1 - x0;
+      // fraction: insulin → fraction of 100 units; standard → fraction of 1 mL
+      let frac;
+      if (state.syringe === 'insulin') frac = insulinUnits / 100;
+      else frac = doseMl / 1;
+      frac = Math.max(0, Math.min(1, frac));
+      // overflow indicator
+      if ((state.syringe === 'insulin' && insulinUnits > 100) ||
+          (state.syringe === 'standard' && doseMl > 1)) {
+        fillRect.setAttribute('fill', 'rgba(255,61,61,0.25)');
+        fillEdge.setAttribute('fill', '#FF3D3D');
+        if (!error) errEl.textContent = 'Dose exceeds a single syringe. Split or use a larger draw.';
+      } else {
+        fillRect.setAttribute('fill', 'rgba(0,229,255,0.25)');
+        fillEdge.setAttribute('fill', '#00E5FF');
+      }
+      const w = span * frac;
+      fillRect.setAttribute('width', w);
+      fillEdge.setAttribute('x', x0 + w - 1);
+      // plunger position: at barrel edge when full, retreats as fill grows? Real syringes: plunger pulls back as you fill.
+      // For visual clarity, position plunger head at the back edge of fill.
+      const plungerHeadX = x0 + w;
+      // we shift the whole plunger group by (plungerHeadX - 88) since plunger head's default x=78..88
+      const dx = plungerHeadX - 88;
+      plunger.setAttribute('transform', 'translate(' + dx + ', 0)');
+
+      // ── frequency text
+      const freqLabels = {
+        '1':'daily', '2':'2× daily', '0.5':'every other day',
+        '0.2857':'2× weekly', '0.1429':'weekly'
+      };
+      const v = freqEl.value;
+      oFreqText.textContent = freqLabels[v] || 'daily';
+    }
+
+    // ── Wire up inputs ─────────────────────────────────
+    function bindNumber(el, key) {
+      el.addEventListener('input', () => {
+        state[key] = el.value;
+        syncPresets();
+        compute();
+      });
+    }
+    bindNumber(vialMgEl, 'vialMg');
+    bindNumber(bacMlEl, 'bacMl');
+    bindNumber(doseEl, 'dose');
+
+    // dose unit toggle
+    function setDoseUnit(u) {
+      state.doseUnit = u;
+      unitMcgBtn.classList.toggle('active', u === 'mcg');
+      unitMgBtn.classList.toggle('active', u === 'mg');
+      compute();
+    }
+    unitMcgBtn.addEventListener('click', () => setDoseUnit('mcg'));
+    unitMgBtn.addEventListener('click', () => setDoseUnit('mg'));
+
+    // syringe radio
+    document.querySelectorAll('.radio-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.radio-card').forEach(c => {
+          c.classList.remove('active');
+          c.setAttribute('aria-checked', 'false');
+        });
+        card.classList.add('active');
+        card.setAttribute('aria-checked', 'true');
+        state.syringe = card.getAttribute('data-syringe');
+        drawTicks();
+        compute();
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+
+    // presets
+    document.querySelectorAll('.presets').forEach(group => {
+      const targetId = group.getAttribute('data-preset-target');
+      const target = document.getElementById(targetId);
+      group.querySelectorAll('.preset').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const v = btn.getAttribute('data-val');
+          target.value = v;
+          state[targetId === 'vial-mg' ? 'vialMg' : 'bacMl'] = v;
+          syncPresets();
+          compute();
+        });
+      });
+    });
+
+    function syncPresets() {
+      document.querySelectorAll('.presets').forEach(group => {
+        const targetId = group.getAttribute('data-preset-target');
+        const target = document.getElementById(targetId);
+        group.querySelectorAll('.preset').forEach(btn => {
+          btn.classList.toggle('active', parseFloat(btn.getAttribute('data-val')) === parseFloat(target.value));
+        });
+      });
+    }
+
+    // frequency
+    freqEl.addEventListener('change', () => {
+      state.freqPerDay = parseFloat(freqEl.value);
+      compute();
+    });
+
+    // ── Init ───────────────────────────────────────────
+    drawTicks();
+    syncPresets();
+    compute();
+  })();
+  </script>
+</body>
+</html>
