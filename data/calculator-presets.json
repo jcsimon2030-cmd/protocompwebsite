@@ -1,0 +1,566 @@
+{
+  "generatedAt": "2026-06-01",
+  "count": 70,
+  "presets": [
+    {
+      "name": "ACE-031",
+      "slug": "ace-031",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "ACE-083",
+      "slug": "ace-083",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Amycretin",
+      "slug": "amycretin",
+      "category": "metabolic",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "AOD-9604",
+      "slug": "aod-9604",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "BPC-157",
+      "slug": "bpc-157",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Cagrilintide",
+      "slug": "cagrilintide",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "CagriSema",
+      "slug": "cagrisema",
+      "category": "metabolic",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "CJC-1293",
+      "slug": "cjc-1293",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "CJC-1295",
+      "slug": "cjc-1295",
+      "category": "gh_secretagogue",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "CJC-1295 (with DAC)",
+      "slug": "cjc-1295-with-dac",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Cortagen",
+      "slug": "cortagen",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Cotadutide",
+      "slug": "cotadutide",
+      "category": "metabolic",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "DSIP",
+      "slug": "dsip",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Efinopegdutide",
+      "slug": "efinopegdutide",
+      "category": "metabolic",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Eloralintide",
+      "slug": "eloralintide",
+      "category": "metabolic",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Epitalon",
+      "slug": "epitalon",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Follistatin 315",
+      "slug": "follistatin-315",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Follistatin 344",
+      "slug": "follistatin-344",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "FOXO4-DRI",
+      "slug": "foxo4-dri",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Genotropin",
+      "slug": "genotropin",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "GHK",
+      "slug": "ghk",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "GHK-Cu",
+      "slug": "ghk-cu",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Ghrelin",
+      "slug": "ghrelin",
+      "category": "gh_secretagogue",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "GHRP-1",
+      "slug": "ghrp-1",
+      "category": "gh_secretagogue",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "GHRP-2",
+      "slug": "ghrp-2",
+      "category": "gh_secretagogue",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "GHRP-6",
+      "slug": "ghrp-6",
+      "category": "gh_secretagogue",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Gonadorelin",
+      "slug": "gonadorelin",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "GRF 1-29",
+      "slug": "grf-1-29",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Hexarelin",
+      "slug": "hexarelin",
+      "category": "gh_secretagogue",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "HGH Fragment 176-191",
+      "slug": "hgh-fragment-176-191",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Humanin",
+      "slug": "humanin",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Humatrope",
+      "slug": "humatrope",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "IGF-1",
+      "slug": "igf-1",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "IGF-1 LR3",
+      "slug": "igf-1-lr3",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "IGF-DES",
+      "slug": "igf-des",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Ipamorelin",
+      "slug": "ipamorelin",
+      "category": "gh_secretagogue",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Kisspeptin-10",
+      "slug": "kisspeptin-10",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Kisspeptin-54",
+      "slug": "kisspeptin-54",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "KPV",
+      "slug": "kpv",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "LL-37",
+      "slug": "ll-37",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "MariTide",
+      "slug": "maritide",
+      "category": "metabolic",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Mazdutide",
+      "slug": "mazdutide",
+      "category": "metabolic",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Melanotan I",
+      "slug": "melanotan-i",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Melanotan II",
+      "slug": "melanotan-ii",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "MGF",
+      "slug": "mgf",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "MOTS-c",
+      "slug": "mots-c",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Myostatin Propeptide",
+      "slug": "myostatin-propeptide",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Omnitrope",
+      "slug": "omnitrope",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "PEG-MGF",
+      "slug": "peg-mgf",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Pemvidutide",
+      "slug": "pemvidutide",
+      "category": "metabolic",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Pinealon",
+      "slug": "pinealon",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "PNC-27",
+      "slug": "pnc-27",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "PT-141",
+      "slug": "pt-141",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Retatrutide",
+      "slug": "retatrutide",
+      "category": "metabolic",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "rhGH",
+      "slug": "rhgh",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Semaglutide",
+      "slug": "semaglutide",
+      "category": "metabolic",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Sermorelin",
+      "slug": "sermorelin",
+      "category": "gh_secretagogue",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Somatropin",
+      "slug": "somatropin",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "SS-20",
+      "slug": "ss-20",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "SS-31",
+      "slug": "ss-31",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Survodutide",
+      "slug": "survodutide",
+      "category": "metabolic",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "TB-500",
+      "slug": "tb-500",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Tesamorelin",
+      "slug": "tesamorelin",
+      "category": "gh_secretagogue",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Thymalin",
+      "slug": "thymalin",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Thymosin Alpha-1",
+      "slug": "thymosin-alpha-1",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Thymulin",
+      "slug": "thymulin",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Tirzepatide",
+      "slug": "tirzepatide",
+      "category": "metabolic",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Vesugen",
+      "slug": "vesugen",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Vilon",
+      "slug": "vilon",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    },
+    {
+      "name": "Zomacton",
+      "slug": "zomacton",
+      "category": "healing",
+      "routes": [
+        "subcutaneous"
+      ]
+    }
+  ]
+}
