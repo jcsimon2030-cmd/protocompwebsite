@@ -18,8 +18,7 @@
         <a href="about.html">About</a>
         <a href="tech.html">Tech</a>
         <a href="faq.html" class="active">FAQ</a>
-        <a href="tools.html">Free Tools</a>
-        <a href="index.html#waitlist" class="nav-cta">Waitlist</a>
+        <a href="index.html#waitlist" class="nav-cta">Early access</a>
       </div>
     </div>
   </nav>
@@ -39,28 +38,15 @@
         <p class="eyebrow faq-group-head">The basics</p>
         <details class="faq-item">
           <summary>What is ProtoComp?</summary>
-          <div class="faq-answer">A peptide-aware training system. Your active compounds change your workouts, your macros, and what your coach sees on their dashboard. Not a tracker.</div>
+          <div class="faq-answer">Adaptive AI coaching for every athlete. It reads your training, recovery, and goals and rewrites your plan as you go — with a deterministic engine underneath as the safety net. Not a tracker. A coach.</div>
         </details>
         <details class="faq-item">
           <summary>Who is this for?</summary>
-          <div class="faq-answer">Lifters who use peptides, performance enhancers, GLP-1s, hormones, or SARMs — and the coaches who manage them. If you're paying for compounds and your app doesn't know they exist, that's the gap we close.</div>
+          <div class="faq-answer">Every athlete — natural, enhanced, and everyone in between — plus the coaches who manage them. Whether you're chasing your first pull-up or peaking for a meet, ProtoComp meets you where you are instead of forcing you into a template.</div>
         </details>
         <details class="faq-item">
           <summary>Is this medical advice?</summary>
-          <div class="faq-answer">No. Educational tool only. Always confirm with your clinician before changing your protocol.</div>
-        </details>
-      </div>
-
-      <!-- PEPTIDES & COMPOUNDS -->
-      <div class="faq-group">
-        <p class="eyebrow faq-group-head">Peptides &amp; compounds</p>
-        <details class="faq-item">
-          <summary>Which compounds does ProtoComp support?</summary>
-          <div class="faq-answer">V1 covers peptides (BPC-157, TB-500, Ipamorelin, CJC-1295, growth hormone peptides, repair peptides, nootropic peptides), GLP-1 agonists, testosterone, SARMs, ancillaries (HCG, Anastrozole, Clomid, Nolvadex, Enclomiphene), fat-loss compounds (Clenbuterol, T3/T4), insulin, and Metformin.</div>
-        </details>
-        <details class="faq-item">
-          <summary>Is the compound database accurate?</summary>
-          <div class="faq-answer">Every compound entry cites published research. Where data is missing, we say so. Sourced from PubMed, FDA labels, manufacturer documentation, and academic reviews.</div>
+          <div class="faq-answer">No. Educational and coaching tool only. Always consult a qualified professional before making significant changes to your training, nutrition, or health.</div>
         </details>
       </div>
 
@@ -68,12 +54,16 @@
       <div class="faq-group">
         <p class="eyebrow faq-group-head">The app</p>
         <details class="faq-item">
-          <summary>How is this different from PepAI / PeptIQ / SHOTLOG?</summary>
-          <div class="faq-answer">They track. We train you differently. Their AI is generic. Ours is corpus-grounded. They don't adjust workouts. We do. They don't have a coach dashboard. We do.</div>
+          <summary>How is this different from other fitness apps?</summary>
+          <div class="faq-answer">Most apps hand everyone the same plan and never adapt. ProtoComp's AI rewrites your plan daily around how you're actually recovering and responding — and explains why. The deterministic engine underneath guarantees the numbers stay sound and the plan never breaks.</div>
         </details>
         <details class="faq-item">
           <summary>How do the AI and the math work together?</summary>
-          <div class="faq-answer">Two halves of one system. The deterministic engines compute your sets, macros, and PK curves — exact and repeatable. The AI reads your corpus, bloodwork, and history to coach on top of that floor and adapt it to you. Every AI claim cites a corpus entry.</div>
+          <div class="faq-answer">The AI leads. It builds your programming, sets your macros, interprets your signals, and adapts your plan to you. The deterministic engine is the floor: exact, repeatable math that bounds what the AI can do and keeps producing a sound plan even if the AI is ever unavailable. Intelligence on top, math as the safety net.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Can I talk to the coach?</summary>
+          <div class="faq-answer">Yes. You can ask why a session changed, push back on a target, or ask for the reasoning behind any recommendation — and get a plain-language answer grounded in evidence.</div>
         </details>
         <details class="faq-item">
           <summary>Will my data be used for training AI models?</summary>
@@ -86,15 +76,15 @@
         <p class="eyebrow faq-group-head">Coaches</p>
         <details class="faq-item">
           <summary>How do coaches use ProtoComp?</summary>
-          <div class="faq-answer">The Coach Watchtower lets you monitor at-risk clients with compound-aware alerts — out-of-range protocols, lab signal contradictions, missed check-ins, weekly check-in flags. One screen, every client.</div>
+          <div class="faq-answer">The coach dashboard lets you monitor every client with context-aware alerts — off-plan trends, contradictory signals, and missed check-ins surface before the next call. One screen, every client.</div>
         </details>
         <details class="faq-item">
           <summary>Can I invite my own clients?</summary>
-          <div class="faq-answer">Yes. Coach tier includes client invites, the AI Avatar Builder, and a private scratchpad for session notes.</div>
+          <div class="faq-answer">Yes. Coach tier includes client invites and tools for managing your roster and session notes.</div>
         </details>
         <details class="faq-item">
           <summary>What does the coach pricing look like?</summary>
-          <div class="faq-answer">Coach tiers start at Starter (10 clients) and scale to Enterprise. Pricing on the in-app subscribe page.</div>
+          <div class="faq-answer">Coach tiers start small and scale with your client count. Details will be available in-app.</div>
         </details>
       </div>
 
@@ -103,19 +93,15 @@
         <p class="eyebrow faq-group-head">Privacy &amp; data</p>
         <details class="faq-item">
           <summary>Where is my data stored?</summary>
-          <div class="faq-answer">Supabase (Postgres) hosted in the US. Row-level security on every table — only you can read your own data.</div>
+          <div class="faq-answer">In an encrypted, access-controlled database hosted in the US. Row-level security on every record — only you can read your own data.</div>
         </details>
         <details class="faq-item">
           <summary>Can I export everything?</summary>
-          <div class="faq-answer">Yes. Settings → Privacy &amp; Legal → Export my data. Returns a JSON file with every row you own.</div>
+          <div class="faq-answer">Yes. One click in Settings returns a file with every row you own.</div>
         </details>
         <details class="faq-item">
           <summary>Can I delete my account?</summary>
-          <div class="faq-answer">Yes. Same Settings panel. Permanently deletes profile, cabinet, logs, photos, bloodwork, and coach relationships. Cannot be recovered.</div>
-        </details>
-        <details class="faq-item">
-          <summary>Do you store controlled substance data?</summary>
-          <div class="faq-answer">We store what you enter. We don't share it. We cooperate with valid legal process per our privacy policy.</div>
+          <div class="faq-answer">Yes. The same Settings panel permanently deletes your profile, logs, and coach relationships. Cannot be recovered.</div>
         </details>
       </div>
 
@@ -124,38 +110,34 @@
         <p class="eyebrow faq-group-head">Pricing</p>
         <details class="faq-item">
           <summary>Is it free?</summary>
-          <div class="faq-answer">Free tier covers basic tracking. Pro unlocks compound-aware coaching, lab interpretation, and advanced features. Pro+ unlocks AI chat and coach features.</div>
+          <div class="faq-answer">A free tier covers the basics. Paid tiers unlock adaptive coaching, deeper insights, and coach features. Pricing will be available in-app.</div>
         </details>
         <details class="faq-item">
           <summary>Is there a free trial?</summary>
-          <div class="faq-answer">New users get a 24-hour Pro preview on their first daily brief.</div>
-        </details>
-        <details class="faq-item">
-          <summary>How much does it cost?</summary>
-          <div class="faq-answer">Pricing in the app. Coach tiers scale with client count.</div>
+          <div class="faq-answer">Yes — new users get a preview of the paid experience to start.</div>
         </details>
       </div>
 
-      <!-- LAUNCH -->
+      <!-- ACCESS -->
       <div class="faq-group">
-        <p class="eyebrow faq-group-head">Launch</p>
+        <p class="eyebrow faq-group-head">Access</p>
         <details class="faq-item">
-          <summary>When does ProtoComp launch?</summary>
-          <div class="faq-answer">iOS + Android, launching soon. Waitlist gets the App Store + Play Store links the day they go live.</div>
+          <summary>Can I use it yet?</summary>
+          <div class="faq-answer">ProtoComp is in private beta. Join the waitlist and we'll reach out with early access as we roll out invitations.</div>
         </details>
         <details class="faq-item">
-          <summary>Is there a web version?</summary>
-          <div class="faq-answer">Yes — the same app runs as a mobile-optimized web app at app.protocomp.com after launch.</div>
+          <summary>What platforms will it run on?</summary>
+          <div class="faq-answer">Mobile-first, with a web experience alongside it. We'll share specifics with early-access members.</div>
         </details>
         <details class="faq-item">
           <summary>Will you support Apple Watch / Garmin / Whoop?</summary>
-          <div class="faq-answer">Wearable integrations are on the roadmap after launch.</div>
+          <div class="faq-answer">Wearable integrations are on the roadmap.</div>
         </details>
       </div>
 
       <div style="margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border-subtle);">
         <p style="color: var(--text-secondary); margin-bottom: 16px;">Didn't answer your question?</p>
-        <a href="index.html#waitlist" class="btn btn-secondary">Join the waitlist — we'll follow up</a>
+        <a href="index.html#waitlist" class="btn btn-secondary">Request early access — we'll follow up</a>
       </div>
 
     </div>
@@ -166,7 +148,7 @@
       <div class="footer-grid">
         <div class="footer-col">
           <a href="index.html" class="nav-brand" style="display: inline-block; margin-bottom: 12px;">proto<b>comp</b></a>
-          <p class="footer-tag">Protocol-aware training system.</p>
+          <p class="footer-tag">Adaptive AI coaching for every athlete.</p>
           <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.5px;">© 2026 ProtoComp</p>
         </div>
         <div class="footer-col">
@@ -176,7 +158,6 @@
             <li><a href="about.html">About</a></li>
             <li><a href="tech.html">Tech</a></li>
             <li><a href="faq.html">FAQ</a></li>
-            <li><a href="tools.html">Free Tools</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -188,7 +169,7 @@
           </ul>
         </div>
       </div>
-      <div class="footer-bottom">Deterministic math · Citation-grounded AI · No guesswork</div>
+      <div class="footer-bottom">AI-driven coaching · Deterministic fallback · Evidence over hype</div>
     </div>
   </footer>
 </body>
