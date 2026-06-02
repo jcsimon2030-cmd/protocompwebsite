@@ -232,12 +232,35 @@
     (function(){
       var f = document.getElementById('waitlist-form');
       if (!f) return;
+      var input = f.querySelector('input');
+      var btn = f.querySelector('button');
+      var state = document.querySelector('.waitlist-state');
+      function setState(msg, ok){
+        if (!state) return;
+        state.style.color = ok ? 'var(--green)' : 'var(--amber)';
+        state.textContent = msg;
+      }
       f.addEventListener('submit', function(e){
         e.preventDefault();
-        var input = f.querySelector('input');
-        var state = document.querySelector('.waitlist-state');
-        if (state) state.textContent = "You're on the list. We'll be in touch.";
-        if (input) input.value = '';
+        var email = input ? input.value.trim() : '';
+        setState('Submitting…', true);
+        if (btn) btn.disabled = true;
+        fetch('/api/waitlist', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        })
+        .then(function(res){ return res.json().then(function(d){ return { ok: res.ok, d: d }; }); })
+        .then(function(r){
+          if (r.ok && r.d && r.d.ok) {
+            setState(r.d.alreadyOnList ? "You're already on the list." : "You're on the list. We'll be in touch.", true);
+            if (input) input.value = '';
+          } else {
+            setState((r.d && r.d.error) ? r.d.error : 'Something went wrong — please try again.', false);
+          }
+        })
+        .catch(function(){ setState('Network error — please try again.', false); })
+        .finally(function(){ if (btn) btn.disabled = false; });
       });
     })();
   </script>
