@@ -16,6 +16,8 @@
 
   /* Accents */
   --cyan:             #00E5FF;
+  --cyan-bright:      #64D2FF;
+  --cyan-deep:        #00B7D7;
   --cyan-glow:        rgba(0, 229, 255, 0.30);
   --cyan-soft:        rgba(0, 229, 255, 0.08);
   --amber:            #FFAB00;
@@ -230,7 +232,7 @@ section {
 }
 .nav-cta:hover {
   color: #000;
-  background: #5cefff;
+  background: var(--cyan-bright);
 }
 @media (max-width: 720px) {
   .nav-links a:not(.nav-cta) { display: none; }
