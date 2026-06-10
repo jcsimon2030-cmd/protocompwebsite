@@ -9,21 +9,39 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/brand/favicon-512.png" />
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="canonical" href="https://protocomp.health/tools" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ProtoComp" />
+  <meta property="og:title" content="Free Tools (Beta) — ProtoComp" />
+  <meta property="og:description" content="Free, open beta tools from ProtoComp: a source-backed peptide encyclopedia and a reconstitution calculator. No login. Educational only." />
+  <meta property="og:url" content="https://protocomp.health/tools" />
+  <meta property="og:image" content="https://protocomp.health/assets/brand/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://protocomp.health/assets/brand/og-image.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body data-screen-label="Free Tools">
+  <a class="skip-link" href="#content">Skip to content</a>
   <nav class="nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-brand">proto<b>comp</b></a>
+      <a href="/" class="nav-brand"><img src="/assets/brand/logo-lockup.png" alt="ProtoComp" /></a>
       <div class="nav-links">
-        <a href="about.html">About</a>
-        <a href="tech.html">How it works</a>
-        <a href="faq.html">FAQ</a>
-        <a href="tools.html" class="active">Tools<span class="beta">beta</span></a>
-        <a href="index.html#waitlist" class="nav-cta">Early access</a>
+        <a href="/about">About</a>
+        <a href="/tech">How it works</a>
+        <a href="/faq">FAQ</a>
+        <a href="/tools" class="active">Tools<span class="beta">beta</span></a>
+        <a href="/#waitlist" class="nav-cta">Early access</a>
       </div>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"></button>
     </div>
   </nav>
+  <span id="content"></span>
 
   <header class="page-header">
     <div class="container">
@@ -36,13 +54,13 @@
   <section>
     <div class="container">
       <div class="grid-2">
-        <a href="peptides.html" class="card card-link" style="text-decoration: none;">
+        <a href="/peptides" class="card card-link" style="text-decoration: none;">
           <p class="eyebrow">Tool 01</p>
           <h3>Peptide Encyclopedia</h3>
           <p>Browse a source-backed reference of 400+ peptides and compounds — mechanism, routes, safety flags, legal/WADA status, and evidence quality. Search and filter by category or evidence level.</p>
           <div class="card-footer" style="color: var(--cyan);">Open encyclopedia →</div>
         </a>
-        <a href="reconstitution.html" class="card card-link" style="text-decoration: none;">
+        <a href="/reconstitution" class="card card-link" style="text-decoration: none;">
           <p class="eyebrow">Tool 02</p>
           <h3>Reconstitution Calculator</h3>
           <p>Compute concentration, units to draw on your syringe, and days supply at your dose. Insulin or standard syringe, with a live syringe readout. Updates as you type.</p>
@@ -55,7 +73,7 @@
           <strong style="color: var(--amber); font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; display: block; margin-bottom: 6px;">Beta · educational only</strong>
           These tools are a free preview and are still being curated. They're educational references, not medical advice or a recommendation to use any compound. Always consult a qualified clinician.
         </div>
-        <a href="index.html#waitlist">Request early access →</a>
+        <a href="/#waitlist">Request early access →</a>
       </div>
     </div>
   </section>
@@ -64,18 +82,18 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <a href="index.html" class="nav-brand" style="display: inline-block; margin-bottom: 12px;">proto<b>comp</b></a>
+          <a href="/" class="footer-brand"><img src="/assets/brand/logo-lockup.png" alt="ProtoComp" /></a>
           <p class="footer-tag">Workouts, food targets, check-ins, and coach visibility — one loop.</p>
           <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.5px;">© 2026 ProtoComp</p>
         </div>
         <div class="footer-col">
           <h5>Product</h5>
           <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="tech.html">How it works</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="tools.html">Tools</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/tech">How it works</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/tools">Tools</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -83,10 +101,15 @@
           <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; max-width: 36ch;">
             ProtoComp is a training and nutrition tool, not medical advice. We don't prescribe, diagnose, treat, source, or sell compounds. Clinical decisions belong with you and your clinician.
           </p>
+          <ul style="margin-top: 14px;">
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/terms">Terms</a></li>
+          </ul>
         </div>
       </div>
       <div class="footer-bottom">Not medical advice · We don't prescribe, source, or sell compounds · Your data stays yours</div>
     </div>
   </footer>
+  <script src="/assets/site.js" defer></script>
 </body>
 </html>

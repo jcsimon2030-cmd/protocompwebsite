@@ -8,21 +8,39 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/brand/favicon-512.png" />
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="canonical" href="https://protocomp.health/tech" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ProtoComp" />
+  <meta property="og:title" content="How it works — ProtoComp" />
+  <meta property="og:description" content="How ProtoComp turns training history, check-ins, and goals into an adaptive plan — with exact, repeatable math underneath so the numbers stay honest." />
+  <meta property="og:url" content="https://protocomp.health/tech" />
+  <meta property="og:image" content="https://protocomp.health/assets/brand/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://protocomp.health/assets/brand/og-image.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body data-screen-label="Tech">
+  <a class="skip-link" href="#content">Skip to content</a>
   <nav class="nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-brand">proto<b>comp</b></a>
+      <a href="/" class="nav-brand"><img src="/assets/brand/logo-lockup.png" alt="ProtoComp" /></a>
       <div class="nav-links">
-        <a href="about.html">About</a>
-        <a href="tech.html" class="active">How it works</a>
-        <a href="faq.html">FAQ</a>
-        <a href="tools.html">Tools<span class="beta">beta</span></a>
-        <a href="index.html#waitlist" class="nav-cta">Early access</a>
+        <a href="/about">About</a>
+        <a href="/tech" class="active">How it works</a>
+        <a href="/faq">FAQ</a>
+        <a href="/tools">Tools<span class="beta">beta</span></a>
+        <a href="/#waitlist" class="nav-cta">Early access</a>
       </div>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"></button>
     </div>
   </nav>
+  <span id="content"></span>
 
   <header class="page-header">
     <div class="container">
@@ -231,18 +249,18 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <a href="index.html" class="nav-brand" style="display: inline-block; margin-bottom: 12px;">proto<b>comp</b></a>
+          <a href="/" class="footer-brand"><img src="/assets/brand/logo-lockup.png" alt="ProtoComp" /></a>
           <p class="footer-tag">Workouts, food targets, check-ins, and coach visibility — one loop.</p>
           <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.5px;">© 2026 ProtoComp</p>
         </div>
         <div class="footer-col">
           <h5>Product</h5>
           <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="tech.html">How it works</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="tools.html">Tools</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/tech">How it works</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/tools">Tools</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -250,10 +268,15 @@
           <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; max-width: 36ch;">
             ProtoComp is a training and nutrition tool, not medical advice. We don't prescribe, diagnose, treat, source, or sell compounds. Clinical decisions belong with you and your clinician.
           </p>
+          <ul style="margin-top: 14px;">
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/terms">Terms</a></li>
+          </ul>
         </div>
       </div>
       <div class="footer-bottom">Not medical advice · We don't prescribe, source, or sell compounds · Your data stays yours</div>
     </div>
   </footer>
+  <script src="/assets/site.js" defer></script>
 </body>
 </html>
