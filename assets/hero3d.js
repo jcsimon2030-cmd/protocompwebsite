@@ -56,7 +56,7 @@ const VERT = /* glsl */`
     h += ring * 1.7;
 
     h = max(h, 0.06);
-    float H = h * 0.85;
+    float H = h * 0.95;
 
     vNorm = clamp(H / 3.4, 0.0, 1.0);
 
@@ -78,20 +78,20 @@ const FRAG = /* glsl */`
   varying float vEdge;
 
   void main() {
-    vec3 low = vec3(0.015, 0.085, 0.120);
-    vec3 mid = vec3(0.000, 0.520, 0.720);
-    vec3 hi  = vec3(0.000, 0.900, 1.000);   // ProtoComp cyan
+    vec3 low = vec3(0.03, 0.20, 0.27);
+    vec3 mid = vec3(0.00, 0.62, 0.84);
+    vec3 hi  = vec3(0.20, 0.95, 1.00);   // ProtoComp cyan
 
-    vec3 col = mix(low, mid, smoothstep(0.0, 0.55, vNorm));
-    col = mix(col, hi, smoothstep(0.55, 1.0, vNorm));
+    vec3 col = mix(low, mid, smoothstep(0.0, 0.5, vNorm));
+    col = mix(col, hi, smoothstep(0.5, 1.0, vNorm));
 
     // Cheap lambert so the cubes read as solid geometry.
     float diff = clamp(dot(normalize(vNormalW), normalize(vec3(0.35, 1.0, 0.28))), 0.0, 1.0);
-    col *= (0.42 + 0.70 * diff);
+    col *= (0.58 + 0.62 * diff);
 
     // Crest glow — HDR values get reined in by ACES tone mapping.
-    col += hi * pow(vNorm, 3.0) * 1.55;
-    col += hi * vEdge * vNorm * 0.30;        // brighter top faces
+    col += hi * pow(vNorm, 2.2) * 2.1;
+    col += hi * vEdge * vNorm * 0.5;        // brighter top faces
 
     gl_FragColor = vec4(col, 1.0);
   }
@@ -116,10 +116,10 @@ function mount(hero) {
   const DPR = Math.min(window.devicePixelRatio || 1, 2);
   renderer.setPixelRatio(DPR);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.12;
+  renderer.toneMappingExposure = 1.3;
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x000000, 0.052);
+  scene.fog = new THREE.FogExp2(0x000000, 0.04);
 
   const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
   camera.position.set(0, 7.4, 13.5);
