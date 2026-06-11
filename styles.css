@@ -1047,30 +1047,6 @@ footer.site {
    so with JS off or reduced motion every element renders in its final state.
    ───────────────────────────────────────── */
 
-/* Hero 3D centerpiece */
-.hero-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  z-index: 0;
-  pointer-events: none;
-}
-.hero .hero-grid { z-index: 0; }
-.hero-inner { position: relative; z-index: 2; }
-.hero.hero-3d-on .hero-grid { opacity: 0.5; }
-.hero.hero-3d-on::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background:
-    radial-gradient(130% 100% at 72% 38%, transparent 0%, rgba(0,0,0,0.08) 55%, rgba(0,0,0,0.4) 100%),
-    linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.42) 30%, transparent 64%);
-}
-
 /* Tabular figures so animating numbers never reflow their row. */
 .cmp-dose, .adj-val { font-variant-numeric: tabular-nums; }
 
