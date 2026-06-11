@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProtoComp — The brief that builds itself</title>
+  <meta name="description" content="Watch a morning brief build itself — training, fuel, recovery, and coach check-ins computed from your real physiology, in one adaptive loop." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/brand/favicon-512.png" />
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+  <meta name="theme-color" content="#000000" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ProtoComp" />
+  <meta property="og:title" content="ProtoComp — The brief that builds itself" />
+  <meta property="og:description" content="Training, fuel, recovery, and coach check-ins computed from your real physiology, in one adaptive loop." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/assets/landing.css" />
+  <script src="/assets/landing.js?v=1" defer></script>
+</head>
+<body data-screen-label="Landing">
+  <a class="skip-link" href="#story">Skip to content</a>
+  <!-- ───── Nav ───── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand"><img src="/assets/brand/logo-lockup.png" alt="ProtoComp" /></a>
+      <div class="nav-links">
+        <a href="/about">About</a>
+        <a href="/tech">How it works</a>
+        <a href="/faq">FAQ</a>
+        <a href="/tools">Tools<span class="beta">beta</span></a>
+        <a href="/#waitlist" class="nav-cta">Early access</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"></button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ───── Intro hook ───── -->
+    <section class="lp-hero">
+      <div class="container">
+        <p class="eyebrow">The daily brief</p>
+        <h1>Your whole day, computed before you wake up.</h1>
+        <p class="lead">Training, fuel, recovery, and coach check-ins — one adaptive loop that reads your real physiology and adjusts. Scroll to watch a morning brief build itself.</p>
+        <div class="lp-hero-actions">
+          <a href="/#waitlist" class="btn btn-primary">Request early access</a>
+          <a href="#story" class="btn btn-secondary">See it move</a>
+        </div>
+        <p class="lp-scrollcue">Scroll</p>
+      </div>
+    </section>
+
+    <!-- ───── Scroll story ───── -->
+    <section class="lp-story" id="story">
+      <div class="lp-story-grid container">
+        <!-- Pinned media (DOM-first so it pins to the top on mobile) -->
+        <div class="lp-media-sticky">
+          <div class="lp-canvas-wrap">
+            <canvas class="lp-canvas" width="900" height="1125" aria-hidden="true"></canvas>
+            <noscript><img src="/assets/landing/frames/frame-0025.jpg" alt="ProtoComp daily brief" style="width:100%;border-radius:26px;border:1px solid rgba(255,255,255,.08)" /></noscript>
+            <div class="lp-loader" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <!-- Text chapters -->
+        <div class="lp-chapters">
+          <article class="lp-chapter is-active">
+            <span class="lp-step">01 — Training</span>
+            <h2>Your training bends to your readiness.</h2>
+            <p>Sleep, HRV, and recovery roll into a readiness score every morning. On a rough day ProtoComp trims volume and intensity automatically — so you still train, without digging a hole you'll pay for later.</p>
+          </article>
+          <article class="lp-chapter">
+            <span class="lp-step">02 — Nutrition</span>
+            <h2>Fuel that matches the day, not a spreadsheet.</h2>
+            <p>Energy and macro targets recalculate against your goal, your training load, and your context — including GLP-1 use. Protein stays protected as a floor, so the things that matter don't get cut.</p>
+          </article>
+          <article class="lp-chapter">
+            <span class="lp-step">03 — Recovery</span>
+            <h2>Every signal, accounted for.</h2>
+            <p>Sleep, HRV, soreness, stress — the inputs that actually move the needle feed one loop instead of five disconnected apps that never talk to each other.</p>
+          </article>
+          <article class="lp-chapter">
+            <span class="lp-step">04 — Coach</span>
+            <h2>Your coach, amplified — not replaced.</h2>
+            <p>ProtoComp drafts the check-in replies and flags who needs attention, so coaches spend minutes where they used to spend hours. You review, adjust, and send.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───── Climax CTA ───── -->
+    <section class="lp-cta">
+      <div class="container">
+        <h2>Train around your actual physiology.</h2>
+        <p>Private beta, invitations rolling out. For lifters, GLP-1 users, enhanced athletes, and coaches who need more than a tracker.</p>
+        <a href="/#waitlist" class="btn btn-primary">Request early access</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="/" class="footer-brand"><img src="/assets/brand/logo-lockup.png" alt="ProtoComp" /></a>
+          <p class="footer-tag">Workouts, food targets, check-ins, and coach visibility — one loop.</p>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.5px;">© 2026 ProtoComp</p>
+        </div>
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/tech">How it works</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/tools">Tools</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>The fine print</h5>
+          <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; max-width: 36ch;">
+            ProtoComp is a training and nutrition tool, not medical advice. We don't prescribe, diagnose, treat, source, or sell compounds. Clinical decisions belong with you and your clinician.
+          </p>
+          <ul style="margin-top: 14px;">
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/terms">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">Not medical advice · We don't prescribe, source, or sell compounds · Your data stays yours</div>
+    </div>
+  </footer>
+  <script src="/assets/site.js" defer></script>
+</body>
+</html>

@@ -24,6 +24,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://protocomp.health/assets/brand/og-image.png" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="/assets/motion.js?v=3" defer></script>
 </head>
 <body data-screen-label="Home">
   <a class="skip-link" href="#content">Skip to content</a>
@@ -81,27 +82,27 @@
           <div class="cmp-row">
             <span class="cmp-dot green" aria-hidden="true"></span>
             <span class="cmp-name">Readiness <span>computed</span></span>
-            <span class="cmp-dose">72 / 100</span>
+            <span class="cmp-dose" data-count="72" data-suffix=" / 100" data-readiness>72 / 100</span>
           </div>
         </div>
 
         <div class="console-section">
           <p class="console-label">Today's plan — adjusted</p>
-          <div class="adj-row">
+          <div class="adj-row" data-recompute>
             <span class="adj-key">Training volume<small>readiness-weighted · −1 working set</small></span>
-            <span class="adj-val down">−15%</span>
+            <span class="adj-val down" data-count="15" data-prefix="−" data-suffix="%">−15%</span>
           </div>
           <div class="adj-row">
             <span class="adj-key">Energy target<small>TDEE 2,540 · maintenance</small></span>
-            <span class="adj-val neutral">2,540 kcal</span>
+            <span class="adj-val neutral" data-count="2540" data-suffix=" kcal">2,540 kcal</span>
           </div>
           <div class="adj-row">
             <span class="adj-key">Protein floor<small>held — non-negotiable</small></span>
-            <span class="adj-val">180 g</span>
+            <span class="adj-val" data-count="180" data-suffix=" g">180 g</span>
           </div>
           <div class="adj-row">
             <span class="adj-key">Session cap<small>recovery-weighted</small></span>
-            <span class="adj-val">45 min</span>
+            <span class="adj-val" data-count="45" data-suffix=" min">45 min</span>
           </div>
         </div>
       </div>
@@ -261,12 +262,12 @@
             <div class="cmp-row">
               <span class="cmp-dot green" aria-hidden="true"></span>
               <span class="cmp-name">Drafted replies <span>review &amp; send</span></span>
-              <span class="cmp-dose">3</span>
+              <span class="cmp-dose" data-count="3">3</span>
             </div>
             <div class="cmp-row">
               <span class="cmp-dot green" aria-hidden="true"></span>
               <span class="cmp-name">On plan <span>no action needed</span></span>
-              <span class="cmp-dose">8 clients</span>
+              <span class="cmp-dose" data-count="8" data-suffix=" clients">8 clients</span>
             </div>
           </div>
         </div>
