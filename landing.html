@@ -15,7 +15,7 @@
   <meta property="og:title" content="ProtoComp — Your physiology, computed" />
   <meta property="og:description" content="One adaptive loop that reads your real signals — training, fuel, recovery, coach." />
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="/assets/landing.css?v=2" />
+  <link rel="stylesheet" href="/assets/landing.css?v=3" />
   <noscript><style>#loader{display:none!important}.canvas-wrap{clip-path:none}#scroll-container{height:auto}.scroll-section{position:relative;visibility:visible;min-height:70vh;background:rgba(0,0,0,.5)}</style></noscript>
 </head>
 <body data-screen-label="Landing">
@@ -28,7 +28,7 @@
         <a href="/tech">How it works</a>
         <a href="/faq">FAQ</a>
         <a href="/tools">Tools<span class="beta">beta</span></a>
-        <a href="/#waitlist" class="nav-cta">Early access</a>
+        <a href="#waitlist" class="nav-cta">Early access</a>
       </div>
       <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"></button>
     </div>
@@ -60,7 +60,7 @@
 
   <!-- Scroll story -->
   <div id="scroll-container">
-    <section class="scroll-section align-left" data-enter="12" data-leave="27" data-animation="slide-left">
+    <section class="scroll-section align-left" data-enter="13" data-leave="30" data-animation="slide-left">
       <div class="section-inner">
         <span class="section-label">01 / Training</span>
         <h2 class="section-heading">Training that bends to your readiness.</h2>
@@ -68,7 +68,7 @@
       </div>
     </section>
 
-    <section class="scroll-section align-right" data-enter="29" data-leave="44" data-animation="slide-right">
+    <section class="scroll-section align-right" data-enter="32" data-leave="49" data-animation="slide-right">
       <div class="section-inner">
         <span class="section-label">02 / Nutrition</span>
         <h2 class="section-heading">Fuel matched to the day.</h2>
@@ -76,7 +76,7 @@
       </div>
     </section>
 
-    <section class="scroll-section align-left" data-enter="46" data-leave="60" data-animation="scale-up">
+    <section class="scroll-section align-left" data-enter="51" data-leave="66" data-animation="scale-up">
       <div class="section-inner">
         <span class="section-label">03 / Recovery</span>
         <h2 class="section-heading">Every signal, in one loop.</h2>
@@ -84,7 +84,7 @@
       </div>
     </section>
 
-    <section class="scroll-section section-stats" data-enter="64" data-leave="78" data-animation="stagger-up">
+    <section class="scroll-section section-stats" data-enter="69" data-leave="84" data-animation="stagger-up">
       <div class="section-inner">
         <div class="stats-grid">
           <div class="stat"><span class="stat-number" data-value="72" data-decimals="0">0</span><span class="stat-label">Readiness score</span></div>
@@ -95,28 +95,338 @@
       </div>
     </section>
 
-    <section class="scroll-section align-right" data-enter="80" data-leave="91" data-animation="clip-reveal">
+    <section class="scroll-section align-right" data-enter="86" data-leave="98" data-animation="clip-reveal">
       <div class="section-inner">
         <span class="section-label">04 / Coach</span>
         <h2 class="section-heading">Your coach, amplified.</h2>
         <p class="section-body">ProtoComp drafts the check-in replies and flags who needs attention — coaches spend minutes where they used to spend hours. You review, adjust, and send.</p>
       </div>
     </section>
+  </div>
 
-    <section class="scroll-section section-cta" data-enter="93" data-leave="100" data-animation="fade-up" data-persist="true">
-      <div class="section-inner">
-        <span class="section-label">Private beta · rolling out</span>
-        <h2 class="section-heading">Train around your<br />actual physiology.</h2>
-        <p class="section-body" style="margin:0 auto;">For lifters, GLP-1 users, enhanced athletes, and coaches who need more than a tracker.</p>
-        <a href="/#waitlist" class="btn btn-primary cta-button">Request early access</a>
+  <!-- ═══════════ Full site content ═══════════ -->
+  <main id="site-content">
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">The whole loop</p>
+          <h2>Everything that brief computes — and the system behind it.</h2>
+        </div>
+        <p class="lead" style="max-width: 66ch;">The animation above is the daily output. Here's how ProtoComp gets there: training that respects yesterday, fuel that tracks you, check-ins that change the plan, and a coach view that scales attention instead of admin.</p>
       </div>
     </section>
-  </div>
+
+    <!-- Problem -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">The problem</p>
+          <h2>Most apps hand everyone the same plan. You're not everyone.</h2>
+        </div>
+        <p class="lead" style="max-width: 70ch;">
+          Generic apps program you like last week never happened. They don't care how you slept, how you're recovering, whether a GLP-1 has flattened your appetite, or what else is part of your picture. Your coach guesses between check-ins. You plateau, under-recover, or grind through sessions your body wasn't ready for — and the months you're paying for don't add up to much.
+        </p>
+      </div>
+    </section>
+
+    <!-- What it actually does -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">What it actually does</p>
+          <h2>One loop: train, fuel, check in, stay seen.</h2>
+        </div>
+
+        <div class="feature-row">
+          <div class="feature-media">
+            <img src="assets/img/training-deadlift.jpg" alt="Lifter setting up for a deadlift on a dark gym floor" loading="lazy" />
+          </div>
+          <div class="feature-copy">
+            <p class="eyebrow">Train</p>
+            <h3>Sessions that respect yesterday.</h3>
+            <p>Your split, schedule, and training history drive what gets programmed — from a library of 950+ exercises. Slept badly, legs still wrecked, short on time? Today's session adjusts: fewer working sets, a tighter cap. The progression math stays exact, so your numbers keep moving week to week.</p>
+          </div>
+        </div>
+
+        <div class="feature-row flip">
+          <div class="feature-media">
+            <img src="assets/img/nutrition-plate.jpg" alt="Plate of salmon, couscous, and green vegetables" loading="lazy" />
+          </div>
+          <div class="feature-copy">
+            <p class="eyebrow">Fuel</p>
+            <h3>Food targets that track you, not a formula.</h3>
+            <p>Calories and protein move with your weight trend, your training day, and your goal. On a GLP-1 with no appetite? The protein floor holds while energy comes down, so you lose weight without losing the muscle you trained for. Targets you can actually hit, recalculated as you change.</p>
+          </div>
+        </div>
+
+        <div class="feature-row">
+          <div class="feature-media">
+            <img src="assets/img/coach-client.jpg" alt="Coach correcting a client's push-up form in a gym" loading="lazy" />
+          </div>
+          <div class="feature-copy">
+            <p class="eyebrow">Check in</p>
+            <h3>Check-ins that actually change the plan.</h3>
+            <p>Weekly check-ins, progress photos, and training trends land in one place. Training solo? The app turns them into plan adjustments and plain-language guidance you can question. Working with a coach? They see what drifted before your next call — not three weeks after.</p>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 72px;">
+          <article class="card">
+            <p class="eyebrow">Natural-first</p>
+            <h3>The full app, no compounds required.</h3>
+            <p>Training, nutrition, check-ins, and coaching are built for natural athletes first. Nothing useful is gated behind compound features — if that's never part of your life, you'll never notice it's there.</p>
+            <div class="card-footer">Complete from day one</div>
+          </article>
+          <article class="card">
+            <p class="eyebrow">Compound context</p>
+            <h3>Extra intelligence when it's relevant.</h3>
+            <p>If TRT, GLP-1s, or peptides are part of your picture, log them and your training and nutrition take that context into account. We don't prescribe, source, or sell compounds — and for clinical questions, the app points you to your clinician instead of pretending to be one.</p>
+            <div class="card-footer">Context, not commerce</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who it's for -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Who it's for</p>
+          <h2>Four kinds of serious.</h2>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <p class="eyebrow">Natural lifters</p>
+            <h3>Progress without the spreadsheet.</h3>
+            <p>Progressive programs, honest food targets, and a check-in loop that catches plateaus early. Everything a serious natural lifter needs, nothing they don't.</p>
+          </article>
+          <article class="card">
+            <p class="eyebrow">GLP-1 users</p>
+            <h3>Lose the weight, keep the muscle.</h3>
+            <p>Appetite down, weight moving fast — most apps have no idea what to do with that. ProtoComp holds your protein floor and programs training that protects lean mass on the way down.</p>
+          </article>
+          <article class="card">
+            <p class="eyebrow">Enhanced athletes</p>
+            <h3>Software that doesn't pretend you don't exist.</h3>
+            <p>Log what you're actually running and get programming and nutrition that account for it — without judgment, sourcing, or medical claims. Your decisions stay between you and your clinician.</p>
+          </article>
+          <article class="card">
+            <p class="eyebrow">Coaches</p>
+            <h3>Scale attention, not admin.</h3>
+            <p>A roster view that flags who needs you and why, drafted check-in replies you review before they send, and clients who actually log — because the app is worth opening.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Coaches -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">For coaches</p>
+          <h2>Know who needs attention — and why.</h2>
+        </div>
+        <div class="feature-row">
+          <div class="feature-copy">
+            <p style="font-size: 16px; line-height: 1.6; max-width: 54ch;">
+              Spreadsheets and DMs don't scale past a handful of clients. ProtoComp puts your whole roster on one screen: missed check-ins, off-plan weight trends, and contradictory signals surface on their own, so your time goes to the clients who need it this week.
+            </p>
+            <ul class="bullets">
+              <li>Flags raised automatically — missed check-ins, stalled trends, off-plan weeks</li>
+              <li>Drafted check-in replies you review, edit, and send — you stay the coach</li>
+              <li>Client invites and roster tools built in, no extra software</li>
+            </ul>
+          </div>
+          <div class="console" role="img" aria-label="ProtoComp coach view: clients flagged for attention">
+            <div class="console-bar">
+              <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+              <span class="console-title"><b>proto</b>comp · coach view</span>
+              <span class="console-meta">12 CLIENTS</span>
+            </div>
+            <div class="console-section">
+              <p class="console-label">Needs attention</p>
+              <div class="cmp-row">
+                <span class="cmp-dot amber" aria-hidden="true"></span>
+                <span class="cmp-name">M. Torres <span>missed 2 check-ins</span></span>
+                <span class="cmp-dose">flag</span>
+              </div>
+              <div class="cmp-row">
+                <span class="cmp-dot amber" aria-hidden="true"></span>
+                <span class="cmp-name">J. Chen <span>weight off plan · 3 wks</span></span>
+                <span class="cmp-dose">−2.1 kg</span>
+              </div>
+              <div class="cmp-row">
+                <span class="cmp-dot red" aria-hidden="true" style="background: var(--red);"></span>
+                <span class="cmp-name">D. Okafor <span>soreness up, volume up</span></span>
+                <span class="cmp-dose">review</span>
+              </div>
+            </div>
+            <div class="console-section">
+              <p class="console-label">Ready for you</p>
+              <div class="cmp-row">
+                <span class="cmp-dot green" aria-hidden="true"></span>
+                <span class="cmp-name">Drafted replies <span>review &amp; send</span></span>
+                <span class="cmp-dose" data-count="3">3</span>
+              </div>
+              <div class="cmp-row">
+                <span class="cmp-dot green" aria-hidden="true"></span>
+                <span class="cmp-name">On plan <span>no action needed</span></span>
+                <span class="cmp-dose" data-count="8" data-suffix=" clients">8 clients</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust & safety -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Trust &amp; safety</p>
+          <h2>Clear about the line we don't cross.</h2>
+        </div>
+        <div class="does-grid">
+          <div class="does-col">
+            <p class="does-head yes">✓ What ProtoComp is</p>
+            <ul class="does-list">
+              <li>A training and nutrition system that adapts to your context</li>
+              <li>A check-in loop that keeps you and your coach honest</li>
+              <li>Compound-aware when that's part of your picture — educational context, clearly graded by evidence</li>
+              <li>Private by default: export everything, delete everything, no selling your data, no training models on it</li>
+            </ul>
+          </div>
+          <div class="does-col">
+            <p class="does-head no">✗ What it will never be</p>
+            <ul class="does-list">
+              <li>Medical advice — clinical questions go to your clinician, and the app says so</li>
+              <li>A pharmacy or a marketplace — we don't prescribe, diagnose, treat, source, supply, or sell compounds</li>
+              <li>A telehealth provider — no consults, no scripts, no vendor referrals</li>
+              <li>A judgment machine — your choices stay yours</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Free tools -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Free tools · beta</p>
+          <h2>Useful before you ever sign up.</h2>
+        </div>
+        <div class="grid-2">
+          <a href="/peptides" class="card card-link" style="text-decoration: none;">
+            <p class="eyebrow">Reference</p>
+            <h3>Peptide Encyclopedia</h3>
+            <p>A source-backed reference of 400+ peptides and compounds — mechanisms, safety flags, WADA status, and evidence quality, graded honestly. Educational only.</p>
+            <div class="card-footer" style="color: var(--cyan);">Open encyclopedia →</div>
+          </a>
+          <a href="/reconstitution" class="card card-link" style="text-decoration: none;">
+            <p class="eyebrow">Calculator</p>
+            <h3>Reconstitution Calculator</h3>
+            <p>Concentration, units to draw, and days of supply — computed live as you type, with a visual syringe readout. No login, no paywall.</p>
+            <div class="card-footer" style="color: var(--cyan);">Open calculator →</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Waitlist -->
+    <section id="waitlist">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Early access</p>
+          <h2>Request early access.</h2>
+        </div>
+        <form id="waitlist-form" class="waitlist-form">
+          <input class="input" type="email" required placeholder="you@domain.com" aria-label="Email" />
+          <button class="btn btn-primary" type="submit">Request access</button>
+        </form>
+        <p class="waitlist-state mono" style="font-size: 12px; color: var(--green); margin-top: 12px; min-height: 1em; letter-spacing: 0.5px;"></p>
+        <p style="margin-top: 16px; font-size: 13px; color: var(--text-tertiary); max-width: 50ch;">
+          ProtoComp is in private beta. Invitations go out in small batches as we expand. No spam, unsubscribe anytime.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="/" class="footer-brand"><img src="/assets/brand/logo-lockup.png" alt="ProtoComp" /></a>
+          <p class="footer-tag">Workouts, food targets, check-ins, and coach visibility — one loop.</p>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.5px;">© 2026 ProtoComp</p>
+        </div>
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/tech">How it works</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/tools">Tools</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>The fine print</h5>
+          <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; max-width: 36ch;">
+            ProtoComp is a training and nutrition tool, not medical advice. We don't prescribe, diagnose, treat, source, or sell compounds. Clinical decisions belong with you and your clinician.
+          </p>
+          <ul style="margin-top: 14px;">
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/terms">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">Not medical advice · We don't prescribe, source, or sell compounds · Your data stays yours</div>
+    </div>
+  </footer>
 
   <script src="/assets/vendor/lenis.min.js" defer></script>
   <script src="/assets/vendor/gsap.min.js" defer></script>
   <script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="/assets/landing.js?v=2" defer></script>
+  <script src="/assets/landing.js?v=3" defer></script>
+  <script src="/assets/motion.js?v=3" defer></script>
+  <script>
+    (function(){
+      var f = document.getElementById('waitlist-form');
+      if (!f) return;
+      var input = f.querySelector('input');
+      var btn = f.querySelector('button');
+      var state = document.querySelector('.waitlist-state');
+      function setState(msg, ok){
+        if (!state) return;
+        state.style.color = ok ? 'var(--green)' : 'var(--amber)';
+        state.textContent = msg;
+      }
+      f.addEventListener('submit', function(e){
+        e.preventDefault();
+        var email = input ? input.value.trim() : '';
+        setState('Submitting…', true);
+        if (btn) btn.disabled = true;
+        fetch('/api/waitlist', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        })
+        .then(function(res){ return res.json().then(function(d){ return { ok: res.ok, d: d }; }); })
+        .then(function(r){
+          if (r.ok && r.d && r.d.ok) {
+            setState(r.d.alreadyOnList ? "You're already on the list." : "You're on the list. We'll be in touch.", true);
+            if (input) input.value = '';
+          } else {
+            setState((r.d && r.d.error) ? r.d.error : 'Something went wrong — please try again.', false);
+          }
+        })
+        .catch(function(){ setState('Network error — please try again.', false); })
+        .finally(function(){ if (btn) btn.disabled = false; });
+      });
+    })();
+  </script>
   <script src="/assets/site.js" defer></script>
 </body>
 </html>

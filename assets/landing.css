@@ -55,7 +55,7 @@
 .scroll-indicator::after { content: ''; width: 1px; height: 34px; background: linear-gradient(var(--cyan), transparent); }
 
 /* Scroll sections */
-#scroll-container { position: relative; height: 800vh; z-index: 4; }
+#scroll-container { position: relative; height: 680vh; z-index: 4; }
 .scroll-section { position: fixed; inset: 0; z-index: 4; display: flex; align-items: center; visibility: hidden; pointer-events: none; }
 .scroll-section a, .scroll-section .cta-button { pointer-events: auto; }
 .section-inner { max-width: 38vw; }
@@ -84,8 +84,16 @@
 .section-cta .section-inner { max-width: none; width: 100%; text-align: center; padding: 0 6vw; }
 .cta-button { display: inline-block; margin-top: 28px; }
 
+/* Full site content flows in over the fixed video stage after the scroll story. */
+#site-content {
+  position: relative;
+  z-index: 20;
+  background: var(--bg);
+  box-shadow: 0 -50px 90px 24px var(--bg);
+}
+
 @media (max-width: 768px) {
-  #scroll-container { height: 560vh; }
+  #scroll-container { height: 480vh; }
   .align-left, .align-right { padding: 0 8vw; justify-content: center; }
   .section-inner { max-width: none; text-align: center; }
   .scroll-section { background: linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.58)); }
