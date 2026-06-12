@@ -1,94 +1,232 @@
-// Scroll-driven frame player for the landing page.
-// Preloads the ffmpeg-extracted frame sequence, then maps page scroll position
-// through the story section onto a frame index drawn to a canvas. Reduced-motion
-// shows a single representative frame and skips scrubbing.
+// ProtoComp — premium scroll-driven video landing engine.
+// Lenis smooth scroll + GSAP/ScrollTrigger. Scroll position scrubs an
+// ffmpeg-extracted WebP frame sequence on a full-viewport canvas, while
+// side-aligned text sections choreograph in with varied entrances.
 (function () {
   'use strict';
 
-  var N = 144; // frame count (assets/landing/frames/frame-0001.jpg …)
-  var canvas = document.querySelector('.lp-canvas');
-  var section = document.querySelector('.lp-story');
-  if (!canvas || !section) return;
+  var FRAME_COUNT = 217;
+  var FRAME_SPEED = 2.0;     // product animation resolves by ~50% scroll
+  var IMAGE_SCALE = 0.94;    // padded cover
+  var BG = '#04060a';
+  var framePath = function (i) {
+    return '/assets/landing/frames/frame_' + ('000' + (i + 1)).slice(-4) + '.webp';
+  };
+
+  var canvas = document.getElementById('canvas');
+  var scrollContainer = document.getElementById('scroll-container');
+  if (!canvas || !scrollContainer || !window.gsap || !window.ScrollTrigger) return;
 
   var ctx = canvas.getContext('2d');
-  var loader = document.querySelector('.lp-loader');
-  var chapters = [].slice.call(document.querySelectorAll('.lp-chapter'));
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  gsap.registerPlugin(ScrollTrigger);
 
-  function pad(n) { return ('000' + n).slice(-4); }
-  function src(i) { return '/assets/landing/frames/frame-' + pad(i + 1) + '.jpg'; }
+  var canvasWrap = document.querySelector('.canvas-wrap');
+  var hero = document.querySelector('.hero-standalone');
+  var overlay = document.getElementById('dark-overlay');
+  var loader = document.getElementById('loader');
+  var loaderBar = document.getElementById('loader-bar');
+  var loaderPct = document.getElementById('loader-percent');
 
-  var imgs = new Array(N);
-  var loaded = 0;
-  var cur = -1;
+  // ── canvas sizing (DPR-aware) ───────────────────────────────
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.floor(window.innerWidth * dpr);
+    canvas.height = Math.floor(window.innerHeight * dpr);
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    drawFrame(currentFrame);
+  }
 
-  function draw(i) {
-    i = i < 0 ? 0 : (i > N - 1 ? N - 1 : i | 0);
-    if (i === cur) return;
-    var im = imgs[i];
-    if (im && im.complete && im.naturalWidth) {
-      ctx.drawImage(im, 0, 0, canvas.width, canvas.height);
-      cur = i;
+  var frames = new Array(FRAME_COUNT);
+  var currentFrame = 0;
+
+  function drawFrame(i) {
+    var img = frames[i];
+    if (!img || !img.naturalWidth) return;
+    var cw = canvas.width, ch = canvas.height;
+    var iw = img.naturalWidth, ih = img.naturalHeight;
+    var scale = Math.max(cw / iw, ch / ih) * IMAGE_SCALE;
+    var dw = iw * scale, dh = ih * scale;
+    ctx.fillStyle = BG;
+    ctx.fillRect(0, 0, cw, ch);
+    ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+  }
+
+  // ── two-phase preloader ─────────────────────────────────────
+  function loadFrame(i) {
+    return new Promise(function (res) {
+      var im = new Image();
+      im.onload = im.onerror = function () { res(); };
+      im.src = framePath(i);
+      frames[i] = im;
+    });
+  }
+  function setLoad(frac) {
+    if (loaderBar) loaderBar.style.width = Math.round(frac * 100) + '%';
+    if (loaderPct) loaderPct.textContent = Math.round(frac * 100) + '%';
+  }
+  async function preload() {
+    var head = Math.min(12, FRAME_COUNT);
+    for (var i = 0; i < head; i++) { await loadFrame(i); setLoad((i + 1) / FRAME_COUNT); }
+    drawFrame(0);
+    var done = head;
+    var rest = [];
+    for (var j = head; j < FRAME_COUNT; j++) {
+      rest.push(loadFrame(j).then(function () { done++; setLoad(done / FRAME_COUNT); }));
+    }
+    await Promise.all(rest);
+  }
+
+  // ── section choreography ────────────────────────────────────
+  var sections = [];
+  function buildTimeline(section, type) {
+    var kids = section.querySelectorAll('.section-label, .section-heading, .section-body, .section-note, .cta-button, .stat');
+    var tl = gsap.timeline({ paused: true });
+    var d = reduce ? 0.001 : 0.9, st = reduce ? 0 : 0.13;
+    var from;
+    switch (type) {
+      case 'slide-left':  from = { x: -90, opacity: 0 }; break;
+      case 'slide-right': from = { x: 90, opacity: 0 }; break;
+      case 'scale-up':    from = { scale: 0.85, opacity: 0, transformOrigin: '50% 50%' }; break;
+      case 'rotate-in':   from = { y: 44, rotation: 3, opacity: 0 }; break;
+      case 'stagger-up':  from = { y: 64, opacity: 0 }; break;
+      case 'clip-reveal': from = { clipPath: 'inset(100% 0 0 0)', opacity: 0 }; break;
+      default:            from = { y: 52, opacity: 0 }; // fade-up
+    }
+    from.duration = d; from.stagger = st;
+    from.ease = type === 'scale-up' ? 'power2.out' : (type === 'clip-reveal' ? 'power4.inOut' : 'power3.out');
+    tl.from(kids, from);
+    return tl;
+  }
+
+  function setupSections() {
+    [].forEach.call(document.querySelectorAll('.scroll-section'), function (section) {
+      var cfg = {
+        el: section,
+        enter: parseFloat(section.dataset.enter) / 100,
+        leave: parseFloat(section.dataset.leave) / 100,
+        persist: section.dataset.persist === 'true',
+        tl: buildTimeline(section, section.dataset.animation),
+        state: 'pre',
+        onIn: null,
+      };
+      if (section.classList.contains('section-stats')) cfg.onIn = makeCounters(section);
+      sections.push(cfg);
+    });
+  }
+
+  function updateSection(s, p) {
+    var inWin = p >= s.enter && p <= s.leave;
+    if (inWin || (p > s.leave && s.persist)) {
+      if (s.state !== 'in') {
+        s.state = 'in';
+        s.el.style.visibility = 'visible';
+        s.tl.timeScale(1).play();
+        if (s.onIn) { s.onIn(); s.onIn = null; }
+      }
+    } else if (s.state !== 'out') {
+      s.state = 'out';
+      s.tl.timeScale(1.8).reverse();
     }
   }
 
-  function progress() {
-    var r = section.getBoundingClientRect();
-    var denom = r.height - window.innerHeight;
-    if (denom <= 0) return 0;
-    var p = -r.top / denom;
-    return p < 0 ? 0 : (p > 1 ? 1 : p);
+  // ── counters ────────────────────────────────────────────────
+  function makeCounters(section) {
+    return function () {
+      [].forEach.call(section.querySelectorAll('.stat-number'), function (el) {
+        var target = parseFloat(el.dataset.value);
+        var dec = parseInt(el.dataset.decimals || '0', 10);
+        if (reduce) { el.textContent = target.toFixed(dec); return; }
+        gsap.fromTo(el, { textContent: 0 }, {
+          textContent: target, duration: 2, ease: 'power1.out',
+          snap: { textContent: dec === 0 ? 1 : 0.01 },
+          onUpdate: function () {
+            el.textContent = parseFloat(el.textContent).toFixed(dec);
+          },
+        });
+      });
+    };
   }
 
-  function render() {
-    var p = progress();
-    draw(Math.round(p * (N - 1)));
-    var st = Math.floor(p * 4);
-    if (st > 3) st = 3; if (st < 0) st = 0;
-    for (var k = 0; k < chapters.length; k++) {
-      chapters[k].classList.toggle('is-active', k === st);
-    }
+  // ── hero circle-wipe + dark overlay ─────────────────────────
+  // The hero fades and the canvas circle-wipes in across the hero's own scroll.
+  function initHero() {
+    if (!hero) return;
+    if (reduce) { if (canvasWrap) canvasWrap.style.clipPath = 'none'; return; }
+    ScrollTrigger.create({
+      trigger: hero, start: 'top top', end: 'bottom top', scrub: true,
+      onUpdate: function (self) {
+        var p = self.progress;
+        hero.style.opacity = 1 - p;
+        if (canvasWrap) canvasWrap.style.clipPath = 'circle(' + Math.min(1, p * 1.25) * 82 + '% at 50% 50%)';
+      },
+    });
+  }
+  var ov = { enter: 0.64, leave: 0.78 };
+  function updateOverlay(p) {
+    if (!overlay) return;
+    var fr = 0.04, o = 0;
+    if (p >= ov.enter - fr && p <= ov.enter) o = (p - (ov.enter - fr)) / fr;
+    else if (p > ov.enter && p < ov.leave) o = 0.9;
+    else if (p >= ov.leave && p <= ov.leave + fr) o = 0.9 * (1 - (p - ov.leave) / fr);
+    overlay.style.opacity = o;
   }
 
-  var ticking = false;
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(function () { render(); ticking = false; });
+  // ── marquee ─────────────────────────────────────────────────
+  function setupMarquee() {
+    [].forEach.call(document.querySelectorAll('.marquee-wrap'), function (el) {
+      var speed = parseFloat(el.dataset.scrollSpeed) || -28;
+      var text = el.querySelector('.marquee-text');
+      if (text && !reduce) {
+        gsap.to(text, {
+          xPercent: speed, ease: 'none',
+          scrollTrigger: { trigger: scrollContainer, start: 'top top', end: 'bottom bottom', scrub: true },
+        });
+      }
+      ScrollTrigger.create({
+        trigger: scrollContainer, start: 'top top', end: 'bottom bottom', scrub: true,
+        onUpdate: function (self) {
+          var p = self.progress;
+          el.style.opacity = (p > 0.12 && p < 0.9) ? 0.5 : 0;
+        },
+      });
+    });
   }
 
-  function setLoad(pct) { if (loader) loader.style.setProperty('--p', pct + '%'); }
-
+  // ── master scroll driver ────────────────────────────────────
   function start() {
     if (loader) loader.classList.add('done');
-    // size the canvas backing store to the frame's natural resolution
-    var first = imgs[0];
-    if (first && first.naturalWidth) {
-      canvas.width = first.naturalWidth;
-      canvas.height = first.naturalHeight;
+    resize();
+    window.addEventListener('resize', function () { resize(); ScrollTrigger.refresh(); }, { passive: true });
+
+    if (!reduce && window.Lenis) {
+      var lenis = new Lenis({ duration: 1.2, easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }, smoothWheel: true });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
     }
-    if (reduce) {
-      draw(Math.round(0.16 * (N - 1)));
-      if (chapters[0]) chapters[0].classList.add('is-active');
-      return;
+    setupSections();
+    setupMarquee();
+    initHero();
+
+    if (!reduce) {
+      gsap.from('.hero-heading .word', { yPercent: 60, opacity: 0, stagger: 0.08, duration: 1, ease: 'power4.out', delay: 0.15 });
+      gsap.from('.hero-standalone .section-label, .hero-tagline, .scroll-indicator', { y: 24, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out', delay: 0.5 });
     }
-    render();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+
+    ScrollTrigger.create({
+      trigger: scrollContainer, start: 'top top', end: 'bottom bottom', scrub: true,
+      onUpdate: function (self) {
+        var p = self.progress;
+        var idx = Math.min(Math.floor(Math.min(p * FRAME_SPEED, 1) * FRAME_COUNT), FRAME_COUNT - 1);
+        if (idx !== currentFrame) { currentFrame = idx; requestAnimationFrame(function () { drawFrame(idx); }); }
+        updateOverlay(p);
+        for (var i = 0; i < sections.length; i++) updateSection(sections[i], p);
+      },
+    });
+    ScrollTrigger.refresh();
   }
 
-  // Preload every frame; start once all are in (errors count too, so a missing
-  // frame never deadlocks the loader).
-  for (var i = 0; i < N; i++) {
-    (function (i) {
-      var im = new Image();
-      im.onload = im.onerror = function () {
-        loaded++;
-        setLoad(Math.round((loaded / N) * 100));
-        if (loaded === N) start();
-      };
-      im.src = src(i);
-      imgs[i] = im;
-    })(i);
-  }
+  preload().then(start);
 })();
