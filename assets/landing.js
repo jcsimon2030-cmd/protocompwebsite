@@ -81,22 +81,23 @@
   // ── section choreography ────────────────────────────────────
   var sections = [];
   function buildTimeline(section, type) {
+    var inner = section.querySelector('.section-inner');
     var kids = section.querySelectorAll('.section-label, .section-heading, .section-body, .section-note, .cta-button, .stat');
     var tl = gsap.timeline({ paused: true });
-    var d = reduce ? 0.001 : 0.9, st = reduce ? 0 : 0.13;
-    var from;
+    var d = reduce ? 0.001 : 0.85, st = reduce ? 0 : 0.12;
+    // The whole glass panel fades+moves with the section, so an inactive section
+    // shows NOTHING (no lingering empty box). Children then stagger inside it.
+    var p = { opacity: 0, duration: reduce ? 0.001 : 0.7, ease: 'power3.out' };
     switch (type) {
-      case 'slide-left':  from = { x: -90, opacity: 0 }; break;
-      case 'slide-right': from = { x: 90, opacity: 0 }; break;
-      case 'scale-up':    from = { scale: 0.85, opacity: 0, transformOrigin: '50% 50%' }; break;
-      case 'rotate-in':   from = { y: 44, rotation: 3, opacity: 0 }; break;
-      case 'stagger-up':  from = { y: 64, opacity: 0 }; break;
-      case 'clip-reveal': from = { clipPath: 'inset(100% 0 0 0)', opacity: 0 }; break;
-      default:            from = { y: 52, opacity: 0 }; // fade-up
+      case 'slide-left':  p.x = -80; break;
+      case 'slide-right': p.x = 80; break;
+      case 'scale-up':    p.scale = 0.92; p.transformOrigin = '50% 50%'; break;
+      case 'rotate-in':   p.y = 40; p.rotation = 2; break;
+      case 'clip-reveal': p.y = 40; p.scale = 0.96; p.transformOrigin = '50% 100%'; break;
+      default:            p.y = 50;
     }
-    from.duration = d; from.stagger = st;
-    from.ease = type === 'scale-up' ? 'power2.out' : (type === 'clip-reveal' ? 'power4.inOut' : 'power3.out');
-    tl.from(kids, from);
+    if (inner) tl.from(inner, p);
+    tl.from(kids, { y: 20, opacity: 0, stagger: st, duration: d, ease: 'power3.out' }, '-=0.35');
     return tl;
   }
 
